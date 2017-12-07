@@ -1,6 +1,6 @@
 <?php namespace App\Controllers\UserController;
 
-class ResponseMessageConstants
+final class ResponseMessageConstants
 {
     const UNKNOWN_ERROR_ID      = 2001;
     const UNKNOWN_ERROR_MESSAGE = 'Unknown error.';

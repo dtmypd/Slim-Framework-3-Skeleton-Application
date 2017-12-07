@@ -1,6 +1,6 @@
 <?php namespace ExtendedSlim\Http;
 
-class HttpCodeConstants
+final class HttpCodeConstants
 {
 
     // 1XX_INFORMATIONAL

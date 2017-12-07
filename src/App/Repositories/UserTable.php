@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-class UserTable
+final class UserTable
 {
     const TABLE_NAME = 'users';
 
