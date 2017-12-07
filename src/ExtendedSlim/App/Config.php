@@ -6,8 +6,6 @@ class Config
 {
     /**
      * @param string $manualDotenvFile
-     *
-     * @return void
      */
     public function envSetup($manualDotenvFile = '')
     {
@@ -19,7 +17,7 @@ class Config
     /**
      * @return string
      */
-    private function getDotenvFile()
+    private function getDotenvFile(): string
     {
         return false !== getenv('DOTENV_FILE') ? getenv('DOTENV_FILE') : '.env';
     }

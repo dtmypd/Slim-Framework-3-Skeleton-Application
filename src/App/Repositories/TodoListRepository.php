@@ -45,7 +45,7 @@ class TodoListRepository extends AbstractRepository
      * @return TodoList
      * @throws RecordNotFoundException
      */
-    public function getById($id): ?TodoList
+    public function getById($id): TodoList
     {
         $qB = $this->createQueryBuilder();
 

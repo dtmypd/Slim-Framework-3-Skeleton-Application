@@ -50,7 +50,7 @@ abstract class AbstractIntegrationTest extends TestCase
     /**
      * @return Container
      */
-    protected function getContainer()
+    protected function getContainer(): Container
     {
         return $this->container;
     }

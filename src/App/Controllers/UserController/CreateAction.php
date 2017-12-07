@@ -35,7 +35,7 @@ class CreateAction extends AbstractAction
      * @return Response
      * @throws Exception
      */
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response): Response
     {
         $createRequest = new CreateRequest($request->getParam('name'));
         $violations    = $this->getValidator()->validate($createRequest);
@@ -61,7 +61,7 @@ class CreateAction extends AbstractAction
      * @throws Exception
      * @throws ConnectionException
      */
-    private function executeRequest(Request $request, Response $response)
+    private function executeRequest(Request $request, Response $response): Response
     {
         $this->connection->beginTransaction();
 

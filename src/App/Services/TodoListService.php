@@ -40,7 +40,7 @@ class TodoListService
      * @return TodoList
      * @throws RecordNotFoundException
      */
-    public function getById(int $id): ?TodoList
+    public function getById(int $id): TodoList
     {
         return $this->todoListRepository->getById($id);
     }

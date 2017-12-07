@@ -27,7 +27,7 @@ abstract class AbstractRepository
     /**
      * @return QueryBuilder
      */
-    protected function createQueryBuilder()
+    protected function createQueryBuilder(): QueryBuilder
     {
         return $this->connection->createQueryBuilder();
     }

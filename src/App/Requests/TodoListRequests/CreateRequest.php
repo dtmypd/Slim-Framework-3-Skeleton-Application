@@ -17,7 +17,7 @@ class CreateRequest
      * @param string   $name
      * @param int|null $userId
      */
-    public function __construct(string $name, ?int $userId)
+    public function __construct(string $name, int $userId)
     {
         $this->name   = $name;
         $this->userId = $userId;

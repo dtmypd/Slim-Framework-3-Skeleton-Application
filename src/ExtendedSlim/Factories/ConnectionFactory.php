@@ -10,7 +10,7 @@ class ConnectionFactory
      * @return Connection
      * @throws DBALException
      */
-    public function create()
+    public function create(): Connection
     {
         return DriverManager::getConnection(
             [

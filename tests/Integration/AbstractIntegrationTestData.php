@@ -19,7 +19,7 @@ abstract class AbstractIntegrationTestData
     /**
      * @return QueryBuilder
      */
-    protected function createQueryBuilder()
+    protected function createQueryBuilder(): QueryBuilder
     {
         return $this->connection->createQueryBuilder();
     }

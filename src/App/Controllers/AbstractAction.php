@@ -10,7 +10,7 @@ class AbstractAction
     /**
      * @return RecursiveValidator
      */
-    public function getValidator()
+    public function getValidator(): RecursiveValidator
     {
         return Validation
             ::createValidatorBuilder()
@@ -23,7 +23,7 @@ class AbstractAction
      *
      * @return array
      */
-    public function createErrorResponse($violations)
+    public function createErrorResponse($violations): array
     {
         $messages = [];
         /** @var ConstraintViolation $violation */

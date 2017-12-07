@@ -29,7 +29,7 @@ class ShowAction
      * @return Response
      * @throws Exception
      */
-    public function __invoke(Request $request, Response $response, Route $route)
+    public function __invoke(Request $request, Response $response, Route $route): Response
     {
         try
         {

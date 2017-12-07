@@ -20,7 +20,7 @@ class UserRepository extends AbstractRepository
      * @return User
      * @throws RecordNotFoundException
      */
-    public function findByName(string $name)
+    public function findByName(string $name): User
     {
         $qB  = $this->createQueryBuilder();
         $row = $qB
@@ -43,7 +43,7 @@ class UserRepository extends AbstractRepository
      *
      * @return User
      */
-    private function buildEntity($row)
+    private function buildEntity($row): User
     {
         return new User($row[UserTable::FIELD_ID], $row[UserTable::FIELD_USER_NAME]);
     }
