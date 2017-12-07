@@ -25,6 +25,6 @@ class Response extends SlimHttpResponse
             throw new Exception("Status code setup is needed for error response");
         }
 
-        return $this->withJson(new ResponseData($data, $replyCode, $replyMessage), $statusCode);
+        return $this->withJson(new ResponseEntity($data, $replyCode, $replyMessage), $statusCode);
     }
 }

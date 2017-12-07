@@ -2,7 +2,7 @@
 
 use JsonSerializable;
 
-class ResponseData implements JsonSerializable
+class ResponseEntity implements JsonSerializable
 {
     /** @var mixed */
     private $data;
