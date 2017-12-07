@@ -13,7 +13,7 @@ class Response extends \Slim\Http\Response
      * @return static
      * @throws Exception
      */
-    public function createRestApiResponse($data = null, $replyCode = 0, $replyMessage = 'OK', $statusCode = 200)
+    public function createRestApiResponse($data = true, $replyCode = 0, $replyMessage = 'OK', $statusCode = 200)
     {
         if ($replyCode > 0 && $statusCode == 200)
         {
