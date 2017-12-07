@@ -1,8 +1,9 @@
 <?php namespace ExtendedSlim\Http;
 
 use Exception;
+use Slim\Http\Response as SlimHttpResponse;
 
-class Response extends \Slim\Http\Response
+class Response extends SlimHttpResponse
 {
     /**
      * @param mixed   $data
