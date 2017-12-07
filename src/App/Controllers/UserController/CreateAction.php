@@ -80,7 +80,7 @@ class CreateAction extends AbstractAction
             return $response->createRestApiResponse(
                 null,
                 ResponseMessageConstants::UNKNOWN_ERROR_ID,
-                ResponseMessageConstants::UNKNOWN_ERROR_MESSAGE . $e->getMessage(),
+                ResponseMessageConstants::UNKNOWN_ERROR_MESSAGE,
                 HttpCodeConstants::BAD_REQUEST
             );
         }
