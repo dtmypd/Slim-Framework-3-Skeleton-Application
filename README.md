@@ -5,6 +5,7 @@
 ### Missing features
 * .po based i18n
 * Global logger structure with monolog
+* Error display by dotenv
 
 ### Slim 3: micro-framework
 * [Site](https://www.slimframework.com)

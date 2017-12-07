@@ -1,0 +1,6 @@
+/vendor/
+/logs/*.log
+!/logs/README.md
+.idea
+.env
+.env.test
