@@ -6,10 +6,18 @@
 * .po based i18n
 * Global logger structure with monolog
 * Error display by dotenv
+* End-to-end test
 
 ### Slim 3: micro-framework
 * [Site](https://www.slimframework.com)
 * [Documentation](https://www.slimframework.com/docs)
+
+### PHPUnit
+* [Site](https://phpunit.de)
+* Unit test demo
+* Integration test demo
+* End-to-end test demo (soon)
+
 
 ### DBAL: Doctrine2 query builder 
 * [Repository](https://github.com/doctrine/dbal)
@@ -28,7 +36,7 @@ All server must have it's own environment variables
 ```
 
 ### Phinx:
-* [Site](https://phinx.org/)
+* [Site](https://phinx.org)
 * [Documentation](https://book.cakephp.org/3.0/en/phinx.html)
 ```
 migration by .env: $ vendor/bin/phinx migrate
