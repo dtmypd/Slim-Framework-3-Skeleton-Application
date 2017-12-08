@@ -13,7 +13,7 @@ class IndexPageTest extends AbstractEndToEndTest
      * @throws MethodNotAllowedException
      * @throws NotFoundException
      */
-    public function indexAction_Perfect_Perfect()
+    public function indexAction_StaticWebResponse_Perfect()
     {
         // Arrange
         $expectedResponseBody = 'HTML part can go later with Twig!';
