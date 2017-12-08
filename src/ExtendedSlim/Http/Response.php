@@ -6,19 +6,19 @@ use Slim\Http\Response as SlimHttpResponse;
 class Response extends SlimHttpResponse
 {
     /**
-     * @param mixed   $data
-     * @param integer $replyCode
-     * @param string  $replyMessage
-     * @param integer $statusCode
+     * @param mixed  $data
+     * @param int    $replyCode
+     * @param string $replyMessage
+     * @param int    $statusCode
      *
      * @return static
      * @throws Exception
      */
     public function createRestApiResponse(
         $data = true,
-        $replyCode = 0,
-        $replyMessage = 'OK',
-        $statusCode = 200
+        int $replyCode = 0,
+        string $replyMessage = 'OK',
+        int $statusCode = 200
     ): Response {
         if ($replyCode > 0 && $statusCode == 200)
         {
