@@ -4,7 +4,7 @@ use Exception;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
-class IndexPageTest extends AbstractEndToEndTest
+class IndexActionTest extends AbstractEndToEndTest
 {
     /**
      * @test
@@ -13,7 +13,7 @@ class IndexPageTest extends AbstractEndToEndTest
      * @throws MethodNotAllowedException
      * @throws NotFoundException
      */
-    public function indexAction_StaticWebResponse_Perfect()
+    public function staticWebResponse_perfect()
     {
         // Arrange
         $expectedResponseBody = 'HTML part can go later with Twig!';
