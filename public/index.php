@@ -9,8 +9,6 @@
 //    }
 //}
 
-use App\Controllers\TodoListController;
-use App\Controllers\UserController;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
 
@@ -20,22 +18,8 @@ $app = new App();
 
 (new Config())->envSetup();
 
-$app->group(
-    '/todo-list',
-    function ()
-    {
-        $this->post('/create', TodoListController\CreateAction::class);
-        $this->get('', TodoListController\ListAction::class);
-        $this->get('/{id}', TodoListController\ShowAction::class);
-    }
-);
-
-$app->group('/users',
-    function ()
-    {
-        $this->post('/create', UserController\CreateAction::class);
-    }
-);
+require_once  __DIR__ . '/../routes/api.php';
+require_once  __DIR__ . '/../routes/web.php';
 
 try
 {
