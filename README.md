@@ -21,6 +21,11 @@
 
 ### DotEnv: Environment config
 * [Documentation/Repository](https://github.com/vlucas/phpdotenv)
+```
+Create a `.env` file for the application and `.env.test` file for the integration/end-to-end tests
+DO NOT COMMIT ANY OTHER DOTENV FILE
+All server must have it's own environment variables
+```
 
 ### Phinx:
 * [Site](https://phinx.org/)
