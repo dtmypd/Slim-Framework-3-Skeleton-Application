@@ -1,7 +1,7 @@
 <?php
 
-use App\Controllers\TodoListController;
-use App\Controllers\UserController;
+use App\Controllers\Api\v1\TodoListController;
+use \App\Controllers\Api\v1\UserController;
 
 $app->group('/v1',
     function ()

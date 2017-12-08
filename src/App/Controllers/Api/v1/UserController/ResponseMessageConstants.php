@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\UserController;
+<?php namespace App\Controllers\Api\v1\UserController;
 
 final class ResponseMessageConstants
 {
