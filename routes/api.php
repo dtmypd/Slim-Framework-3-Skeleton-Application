@@ -1,9 +1,10 @@
 <?php
 
 use App\Controllers\Api\v1\TodoListController;
-use \App\Controllers\Api\v1\UserController;
+use App\Controllers\Api\v1\UserController;
 
-$app->group('/v1',
+$app->group(
+    '/v1',
     function ()
     {
         $this->group(
@@ -16,7 +17,8 @@ $app->group('/v1',
             }
         );
 
-        $this->group('/users',
+        $this->group(
+            '/users',
             function ()
             {
                 $this->post('/create', UserController\CreateAction::class);

@@ -1,9 +1,14 @@
 <?php namespace EndToEnd;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
+use ExtendedSlim\Http\ResponseEntity;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
@@ -11,10 +16,46 @@ use Slim\Http\Request;
 use ExtendedSlim\Http\Response;
 use Slim\Http\Environment;
 
-class AbstractEndToEndTest extends TestCase
+abstract class AbstractEndToEndTest extends TestCase
 {
     /** @var bool */
     protected $withMiddleware = true;
+
+    /** @var App */
+    private $app;
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    protected function setUp()
+    {
+        parent::setUp();
+
+        require_once __DIR__ . '/../../vendor/autoload.php';
+
+        (new Config())->envSetup();
+        $app = new App();
+
+        require __DIR__ . '/../../routes/api.php';
+        require __DIR__ . '/../../routes/web.php';
+
+        $this->app = $app;
+
+        $this->getConnection()->beginTransaction();
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     * @throws ConnectionException
+     */
+    protected function tearDown()
+    {
+        parent::tearDown();
+
+        $this->getConnection()->rollBack();
+    }
 
     /**
      * @param string     $requestMethod
@@ -28,8 +69,6 @@ class AbstractEndToEndTest extends TestCase
      */
     private function runApp(string $requestMethod, string $requestUri, array $requestData = null)
     {
-        require_once __DIR__ . '/../../vendor/autoload.php';
-
         $environment = Environment::mock(
             [
                 'REQUEST_METHOD' => $requestMethod,
@@ -39,20 +78,14 @@ class AbstractEndToEndTest extends TestCase
 
         $request = Request::createFromEnvironment($environment);
 
-        if (isset($requestData))
+        if (null !== $requestData)
         {
             $request = $request->withParsedBody($requestData);
         }
 
         $response = new Response();
 
-        (new Config())->envSetup();
-        $app = new App();
-
-        require_once __DIR__ . '/../../routes/api.php';
-        require_once __DIR__ . '/../../routes/web.php';
-
-        return $app->process($request, $response);
+        return $this->app->process($request, $response);
     }
 
     /**
@@ -80,5 +113,32 @@ class AbstractEndToEndTest extends TestCase
     protected function createPostRequest(string $requestUri, array $postData)
     {
         return $this->runApp('POST', $requestUri, $postData);
+    }
+
+    /**
+     * @return Connection
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    protected function getConnection(): Connection
+    {
+        return $this->app->getContainer()->get(Connection::class);
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return ResponseEntity
+     * @throws Exception
+     */
+    protected function createResponseEntityFromResponse(Response $response)
+    {
+        $body = json_decode((string)$response->getBody());
+        if (json_last_error() !== JSON_ERROR_NONE)
+        {
+            throw new Exception('Invalid JSON returned.');
+        }
+
+        return new ResponseEntity($body->data, $body->replyCode, $body->replyMessage);
     }
 }

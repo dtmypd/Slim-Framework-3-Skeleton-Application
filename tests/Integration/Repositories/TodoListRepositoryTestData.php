@@ -1,9 +1,9 @@
 <?php namespace Integration\Repositories;
 
 use App\Repositories\UserTable;
-use Integration\AbstractIntegrationTestData;
+use Tests\AbstractTestData;
 
-class TodoListRepositoryTestData extends AbstractIntegrationTestData
+class TodoListRepositoryTestData extends AbstractTestData
 {
     public function create_insertNewTodo_Perfect()
     {

@@ -1,9 +1,9 @@
-<?php namespace Integration;
+<?php namespace Tests;
 
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Connection;
 
-abstract class AbstractIntegrationTestData
+abstract class AbstractTestData
 {
     /** @var Connection */
     private $connection;

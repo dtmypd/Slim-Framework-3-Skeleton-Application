@@ -17,12 +17,36 @@ class IndexActionTest extends AbstractEndToEndTest
     {
         // Arrange
         $expectedResponseBody = 'HTML part can go later with Twig!';
+        $getUri               = '/';
+        $expectedStatusCode   = 200;
 
         // Act
-        $response = $this->createGetRequest('/');
+        $response = $this->createGetRequest($getUri);
 
         // Assert
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertEquals($expectedStatusCode, $response->getStatusCode(), 'Status code mismatch.');
+        $this->assertEquals($expectedResponseBody, (string)$response->getBody(), 'Response body mismatch.');
+    }
+
+    /**
+     * @test
+     *
+     * @throws Exception
+     * @throws MethodNotAllowedException
+     * @throws NotFoundException
+     */
+    public function qwe()
+    {
+        // Arrange
+        $getUri               = '/';
+        $expectedResponseBody = 'HTML part can go later with Twig!';
+        $expectedStatusCode   = 200;
+
+        // Act
+        $response = $this->createGetRequest($getUri);
+
+        // Assert
+        $this->assertEquals($expectedStatusCode, $response->getStatusCode(), 'Status code mismatch.');
         $this->assertEquals($expectedResponseBody, (string)$response->getBody(), 'Response body mismatch.');
     }
 }

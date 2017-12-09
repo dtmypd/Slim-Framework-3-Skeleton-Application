@@ -26,6 +26,30 @@ class ResponseEntity implements JsonSerializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * @return int
+     */
+    public function getReplyCode(): int
+    {
+        return $this->replyCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReplyMessage(): string
+    {
+        return $this->replyMessage;
+    }
+
+    /**
      * @return array
      */
     public function jsonSerialize(): array
