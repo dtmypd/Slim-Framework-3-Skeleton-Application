@@ -14,12 +14,12 @@ class ConnectionFactory
     {
         return DriverManager::getConnection(
             [
-                'dbname'   => getenv('SQL_DBNAME'),
-                'user'     => getenv('SQL_USER'),
-                'password' => getenv('SQL_PASSWORD'),
-                'host'     => getenv('SQL_HOST'),
-                'port'     => getenv('SQL_PORT'),
-                'driver'   => getenv('SQL_DRIVER'),
+                'dbname'   => env('SQL_DBNAME'),
+                'user'     => env('SQL_USER'),
+                'password' => env('SQL_PASSWORD'),
+                'host'     => env('SQL_HOST'),
+                'port'     => env('SQL_PORT'),
+                'driver'   => env('SQL_DRIVER'),
             ]
         );
     }

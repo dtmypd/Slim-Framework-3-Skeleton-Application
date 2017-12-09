@@ -19,6 +19,6 @@ class Config
      */
     private function getDotenvFile(): string
     {
-        return false !== getenv('DOTENV_FILE') ? getenv('DOTENV_FILE') : '.env';
+        return env('DOTENV_FILE','.env');
     }
 }
