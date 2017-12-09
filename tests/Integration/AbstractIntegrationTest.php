@@ -34,9 +34,9 @@ abstract class AbstractIntegrationTest extends TestCase
      */
     public function tearDown()
     {
-        parent::tearDown();
-
         $this->connection->rollBack();
+
+        parent::tearDown();
     }
 
     /**
