@@ -6,7 +6,6 @@ use Exception;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
 use ExtendedSlim\Http\ResponseEntity;
-use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -15,8 +14,9 @@ use Slim\Exception\NotFoundException;
 use Slim\Http\Request;
 use ExtendedSlim\Http\Response;
 use Slim\Http\Environment;
+use Tests\AbstractTest;
 
-abstract class AbstractEndToEndTest extends TestCase
+abstract class AbstractEndToEndTest extends AbstractTest
 {
     /** @var bool */
     protected $withMiddleware = true;

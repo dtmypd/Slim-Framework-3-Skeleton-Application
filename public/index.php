@@ -13,6 +13,7 @@ use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../src/ExtendedSlim/Helpers.php';
 
 $app = new App();
 

@@ -1,8 +1,8 @@
 <?php namespace App\Entities;
 
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractTest;
 
-class TodoListTest extends TestCase
+class TodoListTest extends AbstractTest
 {
     /**
      * @test

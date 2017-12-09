@@ -8,9 +8,9 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
 use Doctrine\DBAL\Connection;
-use PHPUnit\Framework\TestCase;
+use Tests\AbstractTest;
 
-abstract class AbstractIntegrationTest extends TestCase
+abstract class AbstractIntegrationTest extends AbstractTest
 {
     /** @var Container */
     private $container;
