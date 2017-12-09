@@ -3,9 +3,9 @@
 ## Used libs on Slim 3 with PHP 7.1+
 
 ### Missing features
-* .po based i18n
-* Global logger structure with monolog
-* Error display by dotenv
+* | .po based i18n
+* | -- Translation for errors
+* | Global logger structure with monolog
 
 ### Slim 3: micro-framework
 * [Site](https://www.slimframework.com)

@@ -11,13 +11,14 @@
 
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
+use Slim\Exception\MethodNotAllowedException;
+use Slim\Exception\NotFoundException;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../src/ExtendedSlim/Helpers.php';
 
-$app = new App();
-
 (new Config())->envSetup();
+$app = new App();
 
 require_once  __DIR__ . '/../routes/api.php';
 require_once  __DIR__ . '/../routes/web.php';
@@ -26,15 +27,18 @@ try
 {
     $app->run();
 }
-catch (\Slim\Exception\MethodNotAllowedException $e)
+catch (MethodNotAllowedException $e)
 {
-    echo 'methdod not found';
+    echo 'Unhandled error: method not found.';
+    //@todo: Add logger
 }
-catch (\Slim\Exception\NotFoundException $e)
+catch (NotFoundException $e)
 {
-    echo 'not found';
+    echo 'Unhandled error: not found.';
+    //@todo: Add logger
 }
 catch (Exception $e)
 {
-    echo 'exception';
+    echo 'Unhandled error.';
+    //@todo: Add logger
 }

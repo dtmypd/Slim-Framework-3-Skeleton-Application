@@ -8,6 +8,10 @@ use \DI\Bridge\Slim\ControllerInvoker;
 use \DI\Container;
 use Doctrine\DBAL\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
+use ExtendedSlim\Handlers\Error;
+use ExtendedSlim\Handlers\NotAllowed;
+use ExtendedSlim\Handlers\NotFound;
+use ExtendedSlim\Handlers\PhpError;
 use ExtendedSlim\Http\Response;
 use Interop\Container\ContainerInterface;
 use Invoker\Invoker;
@@ -15,8 +19,6 @@ use Invoker\ParameterResolver\AssociativeArrayResolver;
 use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use Invoker\ParameterResolver\DefaultValueResolver;
 use Invoker\ParameterResolver\ResolverChain;
-use Slim\Handlers\NotAllowed;
-use Slim\Handlers\NotFound;
 use Slim\Http\Environment;
 use \Slim\Http\Headers;
 use \Slim\Http\Request;
@@ -29,13 +31,21 @@ class ContainerConfig
      */
     public function getConfig()
     {
+        return array_merge($this->getBaseConfig(), $this->getDotEnvDependentConfig());
+    }
+
+    /**
+     * @return array
+     */
+    private function getBaseConfig()
+    {
         return [
             // Settings that can be customized by users
             'settings.httpVersion'                       => '1.1',
             'settings.responseChunkSize'                 => 4096,
             'settings.outputBuffering'                   => 'append',
             'settings.determineRouteBeforeAppMiddleware' => false,
-            'settings.displayErrorDetails'               => false,
+            'settings.displayErrorDetails'               => env('SLIM_DISPLAY_ERROR_DETAILS', false),
             'settings.addContentLengthHeader'            => true,
             'settings.routerCacheFile'                   => false,
             'settings'                                   => [
@@ -51,13 +61,6 @@ class ContainerConfig
             'router'                                     => DI\object(Router::class)
                 ->method('setCacheFile', \DI\get('settings.routerCacheFile')),
             Router::class                                => DI\get('router'),
-            //@todo: set with dotenv
-            //            'errorHandler' => DI\object(\Slim\Handlers\Error::class)
-            //                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
-            //            'phpErrorHandler' => DI\object(\Slim\Handlers\PhpError::class)
-            //                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
-            'notFoundHandler'                            => DI\object(NotFound::class),
-            'notAllowedHandler'                          => DI\object(NotAllowed::class),
             'environment'                                => function ()
             {
                 return new Environment($_SERVER);
@@ -77,18 +80,30 @@ class ContainerConfig
             'foundHandler.invoker'                       => function (ContainerInterface $c)
             {
                 $resolvers = [
-                    // Inject parameters by name first
                     new AssociativeArrayResolver(),
-                    // Then inject services by type-hints for those that weren't resolved
                     new TypeHintContainerResolver($c),
-                    // Then fall back on parameters default values for optional route parameters
                     new DefaultValueResolver(),
                 ];
                 return new Invoker(new ResolverChain($resolvers), $c);
             },
             'callableResolver'                           => DI\object(CallableResolver::class),
             ContainerInterface::class                    => DI\get(Container::class),
-            Connection::class                            => DI\factory([ConnectionFactory::class, 'create'])
+            Connection::class                            => DI\factory([ConnectionFactory::class, 'create']),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getDotEnvDependentConfig()
+    {
+        return [
+            'errorHandler'      => DI\object(Error::class)
+                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
+            'phpErrorHandler'   => DI\object(PhpError::class)
+                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
+            'notFoundHandler'   => DI\object(NotFound::class),
+            'notAllowedHandler' => DI\object(NotAllowed::class),
         ];
     }
 }
