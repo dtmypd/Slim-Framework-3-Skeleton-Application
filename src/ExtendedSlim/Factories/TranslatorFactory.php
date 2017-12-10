@@ -18,7 +18,7 @@ class TranslatorFactory
         $languages  = explode(',', env('TRANSLATION_LANGUAGES'));
         $path       = __DIR__ . '/../../../resources/translations/'; // @todo: find better way
 
-        $translator = new Translator('hu_HU'); // @todo: get from config
+        $translator = new Translator(env('TRANSLATION_DEFAULT_LANGUAGE'));
         $translator->addLoader($fileFormat, $this->getLoader($fileFormat));
         foreach ($languages as $language)
         {
@@ -40,8 +40,6 @@ class TranslatorFactory
         {
             case 'po':
                 return new PoFileLoader();
-            case 'array':
-                return new ArrayLoader();
             default:
                 throw new Exception(sprintf('Missing translation loader: %s', $translationFileFormat));
         }

@@ -25,6 +25,11 @@ class TranslationDemoAction
      */
     public function __invoke(Request $request, Response $response)
     {
+        // default language
+        $response->getBody()->write($this->translator->trans('pear'));
+
+        // custom language
+        $this->translator->setLocale('hu_HU');
         $response->getBody()->write($this->translator->trans('pear'));
 
         return $response;
