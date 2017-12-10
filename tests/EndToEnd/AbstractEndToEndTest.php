@@ -11,8 +11,8 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
-use Slim\Http\Request;
 use ExtendedSlim\Http\Response;
+use ExtendedSlim\Http\Request;
 use Slim\Http\Environment;
 use Tests\AbstractTest;
 
