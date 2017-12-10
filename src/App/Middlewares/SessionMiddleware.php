@@ -7,6 +7,17 @@ use Psr\Http\Message\ResponseInterface;
 
 class SessionMiddleware
 {
+    /** @var SessionService */
+    private $sessionService;
+
+    /**
+     * @param SessionService $sessionService
+     */
+    public function __construct(SessionService $sessionService)
+    {
+        $this->sessionService = $sessionService;
+    }
+
     /**
      * @param Request  $request
      * @param Response $response
@@ -16,7 +27,7 @@ class SessionMiddleware
      */
     public function __invoke(Request $request, Response $response, $next)
     {
-        SessionService::sessionStart();
+        $this->sessionService->sessionStart();
 
         return $next($request, $response);
     }

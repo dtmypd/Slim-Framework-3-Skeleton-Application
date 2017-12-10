@@ -11,6 +11,7 @@
 
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
+use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
@@ -20,11 +21,11 @@ require __DIR__ . '/../src/ExtendedSlim/Helpers.php';
 (new Config())->envSetup();
 $app = new App();
 
-require_once  __DIR__ . '/../routes/api.php';
-require_once  __DIR__ . '/../routes/web.php';
-
 try
 {
+    require_once  __DIR__ . '/../routes/api.php';
+    require_once  __DIR__ . '/../routes/web.php';
+
     $app->run();
 }
 catch (MethodNotAllowedException $e)
@@ -35,6 +36,11 @@ catch (MethodNotAllowedException $e)
 catch (NotFoundException $e)
 {
     echo 'Unhandled error: not found.';
+    //@todo: Add logger
+}
+catch (ContainerExceptionInterface $e)
+{
+    echo 'Unhandled error: item not found in container.';
     //@todo: Add logger
 }
 catch (Exception $e)

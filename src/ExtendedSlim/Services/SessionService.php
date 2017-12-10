@@ -111,7 +111,7 @@ class SessionService
      *
      * @return string
      */
-    public static function id($new = false)
+    public function id($new = false)
     {
         if ($new && session_id())
         {
@@ -121,12 +121,12 @@ class SessionService
         return session_id() ?: '';
     }
 
-    public static function sessionStart()
+    public function sessionStart()
     {
         session_start();
     }
 
-    public static function destroy()
+    public function destroy()
     {
         if (self::id())
         {

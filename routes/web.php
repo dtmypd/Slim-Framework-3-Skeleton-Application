@@ -2,6 +2,7 @@
 
 use App\Controllers\Web\IndexController;
 use App\Middlewares\SessionMiddleware;
+use ExtendedSlim\Services\SessionService;
 
 $app->group(
     '',
@@ -12,4 +13,4 @@ $app->group(
         $this->get('/session-demo', IndexController\SessionDemoAction::class);
     }
 )
-    ->add(new SessionMiddleware());
+    ->add(new SessionMiddleware($app->getContainer()->get(SessionService::class)));
