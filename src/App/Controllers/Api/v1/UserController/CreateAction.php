@@ -8,7 +8,7 @@ use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\Response;
-use Slim\Http\Request;
+use ExtendedSlim\Http\Request;
 
 class CreateAction extends AbstractAction
 {

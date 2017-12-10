@@ -1,7 +1,7 @@
 <?php namespace App\Controllers\Web\IndexController;
 
 use ExtendedSlim\Http\Response;
-use Slim\Http\Request;
+use ExtendedSlim\Http\Request;
 
 class IndexAction
 {

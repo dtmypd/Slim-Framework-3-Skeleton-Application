@@ -13,6 +13,7 @@ use ExtendedSlim\Handlers\Error;
 use ExtendedSlim\Handlers\NotAllowed;
 use ExtendedSlim\Handlers\NotFound;
 use ExtendedSlim\Handlers\PhpError;
+use ExtendedSlim\Http\Request;
 use ExtendedSlim\Http\Response;
 use Interop\Container\ContainerInterface;
 use Invoker\Invoker;
@@ -21,8 +22,7 @@ use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use Invoker\ParameterResolver\DefaultValueResolver;
 use Invoker\ParameterResolver\ResolverChain;
 use Slim\Http\Environment;
-use \Slim\Http\Headers;
-use \Slim\Http\Request;
+use Slim\Http\Headers;
 use Slim\Router;
 use Symfony\Component\Translation\Translator;
 

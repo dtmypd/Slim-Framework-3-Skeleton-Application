@@ -5,7 +5,7 @@ use Exception;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\Response;
-use Slim\Http\Request;
+use ExtendedSlim\Http\Request;
 use Slim\Route;
 
 class ShowAction
