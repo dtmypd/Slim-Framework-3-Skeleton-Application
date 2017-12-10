@@ -3,8 +3,7 @@
 ## Used libs on Slim 3 with PHP 7.1+
 
 ### Missing features
-* | .po based i18n
-* | -- Translation for errors
+* | Translation for php errors (not sure it's needed)
 * | Global logger structure with monolog
 
 ### Slim 3: micro-framework
