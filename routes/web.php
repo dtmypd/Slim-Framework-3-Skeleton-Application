@@ -1,6 +1,14 @@
 <?php
 
-use \App\Controllers\Web\IndexController;
+use App\Controllers\Web\IndexController;
+use App\Middlewares\SessionMiddleware;
 
-$app->get('/', IndexController\IndexAction::class);
-$app->get('/translation-demo', IndexController\TranslationDemoAction::class);
+$app->group(
+    '',
+    function ()
+    {
+        $this->get('/', IndexController\IndexAction::class);
+        $this->get('/translation-demo', IndexController\TranslationDemoAction::class);
+    }
+)
+    ->add(new SessionMiddleware());
