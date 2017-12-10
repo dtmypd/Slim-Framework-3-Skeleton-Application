@@ -9,6 +9,8 @@ class IndexActionTest extends AbstractEndToEndTest
     /**
      * @test
      *
+     * @runInSeparateProcess
+     *
      * @throws Exception
      * @throws MethodNotAllowedException
      * @throws NotFoundException

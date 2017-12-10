@@ -12,6 +12,8 @@ class ShowActionTest extends AbstractEndToEndTest
     /**
      * @test
      *
+     * @runInSeparateProcess
+     *
      * @throws Exception
      * @throws MethodNotAllowedException
      * @throws NotFoundException
@@ -29,6 +31,7 @@ class ShowActionTest extends AbstractEndToEndTest
 
         // Act
         $response = $this->createGetRequest($getUri);
+
         $responseEntity = $this->createResponseEntityFromResponse($response);
 
         // Assert
