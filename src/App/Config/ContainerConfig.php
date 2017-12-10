@@ -8,6 +8,7 @@ use \DI\Bridge\Slim\ControllerInvoker;
 use \DI\Container;
 use Doctrine\DBAL\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
+use ExtendedSlim\Factories\TranslatorFactory;
 use ExtendedSlim\Handlers\Error;
 use ExtendedSlim\Handlers\NotAllowed;
 use ExtendedSlim\Handlers\NotFound;
@@ -23,6 +24,7 @@ use Slim\Http\Environment;
 use \Slim\Http\Headers;
 use \Slim\Http\Request;
 use Slim\Router;
+use Symfony\Component\Translation\Translator;
 
 class ContainerConfig
 {
@@ -89,6 +91,7 @@ class ContainerConfig
             'callableResolver'                           => DI\object(CallableResolver::class),
             ContainerInterface::class                    => DI\get(Container::class),
             Connection::class                            => DI\factory([ConnectionFactory::class, 'create']),
+            Translator::class                            => DI\factory([TranslatorFactory::class, 'create']),
         ];
     }
 

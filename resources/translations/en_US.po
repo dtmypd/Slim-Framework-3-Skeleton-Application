@@ -1,0 +1,5 @@
+msgid "apple"
+msgstr "apple"
+
+msgid "pear"
+msgstr "pear"
