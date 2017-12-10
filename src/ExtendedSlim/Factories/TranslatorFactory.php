@@ -1,7 +1,6 @@
 <?php namespace ExtendedSlim\Factories;
 
 use Exception;
-use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 use Symfony\Component\Translation\Loader\PoFileLoader;
 use Symfony\Component\Translation\Translator;
