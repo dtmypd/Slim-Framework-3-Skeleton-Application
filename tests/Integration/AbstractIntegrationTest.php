@@ -20,13 +20,12 @@ abstract class AbstractIntegrationTest extends AbstractTest
 
     public function setUp()
     {
-        (new Config())->envSetup();
+        parent::setUp();
 
+        (new Config())->envSetup();
         $this->container  = (new App())->getContainer();
         $this->connection = $this->container->get(Connection::class);
         $this->connection->beginTransaction();
-
-        parent::setUp();
     }
 
     /**
@@ -34,9 +33,9 @@ abstract class AbstractIntegrationTest extends AbstractTest
      */
     public function tearDown()
     {
-        $this->connection->rollBack();
-
         parent::tearDown();
+
+        $this->connection->rollBack();
     }
 
     /**
