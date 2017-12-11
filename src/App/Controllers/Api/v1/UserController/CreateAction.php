@@ -6,6 +6,7 @@ use App\Services\UserService;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Exception;
+use ExtendedSlim\Factories\ValidatorFactory;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\Response;
 use ExtendedSlim\Http\Request;
@@ -18,14 +19,19 @@ class CreateAction extends AbstractAction
     /** @var Connection */
     private $connection;
 
+    /** @var ValidatorFactory */
+    private $validatorFactory;
+
     /**
-     * @param UserService $userService
-     * @param Connection  $connection
+     * @param UserService      $userService
+     * @param Connection       $connection
+     * @param ValidatorFactory $validatorFactory
      */
-    public function __construct(UserService $userService, Connection $connection)
+    public function __construct(UserService $userService, Connection $connection, ValidatorFactory $validatorFactory)
     {
-        $this->userService = $userService;
-        $this->connection  = $connection;
+        $this->userService      = $userService;
+        $this->connection       = $connection;
+        $this->validatorFactory = $validatorFactory;
     }
 
     /**
@@ -38,7 +44,7 @@ class CreateAction extends AbstractAction
     public function __invoke(Request $request, Response $response): Response
     {
         $createRequest = new CreateRequest($request->getParam('name'));
-        $violations    = $this->getValidator()->validate($createRequest);
+        $violations    = $this->validatorFactory->create()->validate($createRequest);
 
         if ($violations->count() > 0)
         {
