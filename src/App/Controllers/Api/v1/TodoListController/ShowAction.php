@@ -6,6 +6,7 @@ use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\Response;
 use ExtendedSlim\Http\Request;
+use ExtendedSlim\Http\RestApiResponse;
 use Slim\Route;
 
 class ShowAction
@@ -34,18 +35,22 @@ class ShowAction
         try
         {
             return $response->createRestApiResponse(
-                [
-                    'todoList' => $this->todoListService->getById((int)$route->getArgument('id'))
-                ]
+                new RestApiResponse(
+                    [
+                        'todoList' => $this->todoListService->getById((int)$route->getArgument('id'))
+                    ]
+                )
             );
         }
         catch (RecordNotFoundException $e)
         {
             return $response->createRestApiResponse(
-                $request->getAttributes(),
-                ResponseMessageConstants::TODO_ITEM_ERROR_ID,
-                ResponseMessageConstants::TODO_ITEM_ERROR_MESSAGE,
-                HttpCodeConstants::BAD_REQUEST
+                new RestApiResponse(
+                    $request->getAttributes(),
+                    ResponseMessageConstants::TODO_ITEM_ERROR_ID,
+                    ResponseMessageConstants::TODO_ITEM_ERROR_MESSAGE,
+                    HttpCodeConstants::BAD_REQUEST
+                )
             );
         }
     }

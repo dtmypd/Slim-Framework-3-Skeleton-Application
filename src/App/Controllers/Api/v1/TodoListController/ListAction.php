@@ -4,6 +4,7 @@ use App\Services\TodoListService;
 use Exception;
 use ExtendedSlim\Http\Response;
 use ExtendedSlim\Http\Request;
+use ExtendedSlim\Http\RestApiResponse;
 
 class ListAction
 {
@@ -28,9 +29,11 @@ class ListAction
     public function __invoke(Request $request, Response $response)
     {
         return $response->createRestApiResponse(
-            [
-                'todoList' => $this->todoListService->search()
-            ]
+            new RestApiResponse(
+                [
+                    'todoList' => $this->todoListService->search()
+                ]
+            )
         );
     }
 }
