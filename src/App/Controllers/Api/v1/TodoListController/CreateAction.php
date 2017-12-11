@@ -22,10 +22,7 @@ class CreateAction extends AbstractAction
      * @param TodoListService  $todoListService
      * @param ValidatorFactory $validatorFactory
      */
-    public function __construct(
-        TodoListService $todoListService,
-        ValidatorFactory $validatorFactory
-    ) {
+    public function __construct(TodoListService $todoListService, ValidatorFactory $validatorFactory) {
         $this->todoListService  = $todoListService;
         $this->validatorFactory = $validatorFactory;
     }
