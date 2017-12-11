@@ -3,7 +3,7 @@
 use App\Controllers\AbstractAction;
 use App\Requests\UserRequests\CreateRequest;
 use App\Services\UserService;
-use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\Factories\ValidatorFactory;
 use ExtendedSlim\Http\HttpCodeConstants;
@@ -13,38 +13,24 @@ use ExtendedSlim\Http\RestApiResponse;
 
 class CreateAction extends AbstractAction
 {
-    /** @var UserService */
-    private $userService;
-
-    /** @var Connection */
-    private $connection;
-
-    /** @var ValidatorFactory */
-    private $validatorFactory;
-
     /**
+     * @param Request          $request
+     * @param Response         $response
      * @param UserService      $userService
-     * @param Connection       $connection
      * @param ValidatorFactory $validatorFactory
-     */
-    public function __construct(UserService $userService, Connection $connection, ValidatorFactory $validatorFactory)
-    {
-        $this->userService      = $userService;
-        $this->connection       = $connection;
-        $this->validatorFactory = $validatorFactory;
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
      *
      * @return Response
      * @throws Exception
+     * @throws ConnectionException
      */
-    public function __invoke(Request $request, Response $response): Response
-    {
+    public function __invoke(
+        Request $request,
+        Response $response,
+        UserService $userService,
+        ValidatorFactory $validatorFactory
+    ): Response {
         $createRequest = new CreateRequest($request->getParam('name'));
-        $violations    = $this->validatorFactory->create()->validate($createRequest);
+        $violations    = $validatorFactory->create()->validate($createRequest);
 
         if ($violations->count() > 0)
         {
@@ -58,7 +44,7 @@ class CreateAction extends AbstractAction
             );
         }
 
-        $restApiResponse = $this->userService->create($request->getParam('name'));
+        $restApiResponse = $userService->create($request->getParam('name'));
 
         return $response->createRestApiResponse($restApiResponse);
     }

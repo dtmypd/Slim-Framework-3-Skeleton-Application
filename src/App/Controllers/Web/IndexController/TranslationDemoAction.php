@@ -6,31 +6,21 @@ use Symfony\Component\Translation\Translator;
 
 class TranslationDemoAction
 {
-    /** @var Translator */
-    private $translator;
-
     /**
+     * @param Request    $request
+     * @param Response   $response
      * @param Translator $translator
-     */
-    public function __construct(Translator $translator)
-    {
-        $this->translator = $translator;
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response, Translator $translator): Response
     {
         // default language
-        $response->getBody()->write($this->translator->trans('pear'));
+        $response->getBody()->write($translator->trans('pear'));
 
         // custom language
-        $this->translator->setLocale('hu_HU');
-        $response->getBody()->write($this->translator->trans('pear'));
+        $translator->setLocale('hu_HU');
+        $response->getBody()->write($translator->trans('pear'));
 
         return $response;
     }

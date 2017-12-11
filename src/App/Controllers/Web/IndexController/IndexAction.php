@@ -11,7 +11,7 @@ class IndexAction
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response): Response
     {
         $response->getBody()->write('HTML part can go later with Twig!');
 

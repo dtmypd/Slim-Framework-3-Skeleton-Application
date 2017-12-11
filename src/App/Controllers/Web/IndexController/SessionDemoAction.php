@@ -13,7 +13,7 @@ class SessionDemoAction
      *
      * @return Response
      */
-    public function __invoke(Request $request, Response $response, CounterService $counterService)
+    public function __invoke(Request $request, Response $response, CounterService $counterService): Response
     {
         $response->getBody()->write($counterService->addAndGet(2));
 

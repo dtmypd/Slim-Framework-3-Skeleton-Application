@@ -11,33 +11,27 @@ use Slim\Route;
 
 class ShowAction
 {
-    /** @var TodoListService */
-    private $todoListService;
-
     /**
+     * @param Request         $request
+     * @param Response        $response
+     * @param Route           $route
      * @param TodoListService $todoListService
-     */
-    public function __construct(TodoListService $todoListService)
-    {
-        $this->todoListService = $todoListService;
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
-     * @param Route    $route
      *
      * @return Response
      * @throws Exception
      */
-    public function __invoke(Request $request, Response $response, Route $route): Response
-    {
+    public function __invoke(
+        Request $request,
+        Response $response,
+        Route $route,
+        TodoListService $todoListService
+    ): Response {
         try
         {
             return $response->createRestApiResponse(
                 new RestApiResponse(
                     [
-                        'todoList' => $this->todoListService->getById((int)$route->getArgument('id'))
+                        'todoList' => $todoListService->getById((int)$route->getArgument('id'))
                     ]
                 )
             );

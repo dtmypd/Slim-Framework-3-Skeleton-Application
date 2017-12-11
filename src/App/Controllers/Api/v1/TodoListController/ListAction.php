@@ -8,30 +8,20 @@ use ExtendedSlim\Http\RestApiResponse;
 
 class ListAction
 {
-    /** @var TodoListService */
-    private $todoListService;
-
     /**
+     * @param Request         $request
+     * @param Response        $response
      * @param TodoListService $todoListService
-     */
-    public function __construct(TodoListService $todoListService)
-    {
-        $this->todoListService = $todoListService;
-    }
-
-    /**
-     * @param Request  $request
-     * @param Response $response
      *
      * @return Response
      * @throws Exception
      */
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response, TodoListService $todoListService): Response
     {
         return $response->createRestApiResponse(
             new RestApiResponse(
                 [
-                    'todoList' => $this->todoListService->search()
+                    'todoList' => $todoListService->search()
                 ]
             )
         );
