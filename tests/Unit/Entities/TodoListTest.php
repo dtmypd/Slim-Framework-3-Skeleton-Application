@@ -16,11 +16,11 @@ class TodoListTest extends AbstractTest
         $expectedName = 'test name 1';
 
         // Act
-        new TodoList($id, $name);
+        $todoList = new TodoList($id, $name);
 
         // Assert
-        $this->assertEquals($id, $expectedId, 'Entity id mismatch.');
-        $this->assertEquals($name, $expectedName, 'Entity name mismatch.');
+        $this->assertEquals($expectedId, $todoList->getId(), 'Entity id mismatch.');
+        $this->assertEquals($expectedName, $todoList->getName(), 'Entity name mismatch.');
     }
 
     /**
@@ -37,10 +37,10 @@ class TodoListTest extends AbstractTest
     {
         // Arrange - provided
         // Act
-        new TodoList($id, $name);
+        $todoList = new TodoList($id, $name);
 
         // Assert
-        $this->assertEquals($id, $expectedId, 'Entity id mismatch.');
-        $this->assertEquals($name, $expectedName, 'Entity name mismatch.');
+        $this->assertEquals($expectedId, $todoList->getId(), 'Entity id mismatch.');
+        $this->assertEquals($expectedName, $todoList->getName(), 'Entity name mismatch.');
     }
 }
