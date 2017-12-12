@@ -11,6 +11,7 @@ $app->group(
         $this->get('/', IndexController\IndexAction::class);
         $this->get('/translation-demo', IndexController\TranslationDemoAction::class);
         $this->get('/session-demo', IndexController\SessionDemoAction::class);
+        $this->get('/enum-demo', IndexController\EnumDemoAction::class);
     }
 )
     ->add(new SessionMiddleware($app->getContainer()->get(SessionService::class)));
