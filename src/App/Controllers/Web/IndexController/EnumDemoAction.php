@@ -14,12 +14,38 @@ class EnumDemoAction
      */
     public function __invoke(Request $request, Response $response): Response
     {
-        $response->getBody()->write(UserStatus::byValue(1));
-        $response->getBody()->write(UserStatus::get(UserStatus::DELETED));
-        $response->getBody()->write(UserStatus::byName('DELETED'));
-        $response->getBody()->write(UserStatus::byOrdinal(1));
-        $response->getBody()->write(UserStatus::byOrdinal(2));
-        $response->getBody()->write(UserStatus::DELETED);
+        $status = UserStatus::byValue(1);
+        $response->getBody()->write($status->getName());
+
+        $status = UserStatus::get(UserStatus::DELETED);
+        $response->getBody()->write('<br />' . $status->getName());
+        $response->getBody()->write('<br />' . $status->getValue());
+        $response->getBody()->write('<br />' . $status->getOrdinal());
+        $response->getBody()->write('<br />');
+
+        $status = UserStatus::byName('DELETED');
+        $response->getBody()->write('<br />' . $status->getName());
+        $response->getBody()->write('<br />' . $status->getValue());
+        $response->getBody()->write('<br />' . $status->getOrdinal());
+        $response->getBody()->write('<br />');
+
+        $status = UserStatus::byOrdinal(1);
+        $response->getBody()->write('<br />' . $status->getName());
+        $response->getBody()->write('<br />' . $status->getValue());
+        $response->getBody()->write('<br />' . $status->getOrdinal());
+        $response->getBody()->write('<br />');
+
+        $status = UserStatus::byOrdinal(2);
+        $response->getBody()->write('<br />' . $status->getName());
+        $response->getBody()->write('<br />' . $status->getValue());
+        $response->getBody()->write('<br />' . $status->getOrdinal());
+        $response->getBody()->write('<br />');
+
+        $response->getBody()->write('<br />' . print_r(UserStatus::getEnumerators(), true));
+        $response->getBody()->write('<br />' . print_r(UserStatus::getValues(), true));
+        $response->getBody()->write('<br />' . print_r(UserStatus::getNames(), true));
+        $response->getBody()->write('<br />' . print_r(UserStatus::getOrdinals(), true));
+        $response->getBody()->write('<br />' . print_r(UserStatus::getConstants(), true));
 
         return $response;
     }
