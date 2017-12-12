@@ -2,7 +2,7 @@
 
 use MabeEnum\Enum;
 
-class UserStatus extends Enum
+class UserStatusEnum extends Enum
 {
     const INACTIVE = 0;
     const ACTIVE   = 1;
