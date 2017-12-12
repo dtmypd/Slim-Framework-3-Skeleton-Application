@@ -43,3 +43,7 @@ migration by .env.test: $ vendor/bin/phinx migrate -e test
 
 ### Symfony 4 Validator
 * [Site/Documentation](https://symfony.com/doc/current/validation.html)
+
+
+### PHP Enum This is a native PHP implementation to add enumeration support to PHP >= 5.3.
+* [Documentation/Repository](https://github.com/marc-mabe/php-enum)
