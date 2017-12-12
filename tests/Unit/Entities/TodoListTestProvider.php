@@ -2,6 +2,9 @@
 
 class TodoListTestProvider
 {
+    /**
+     * @return array
+     */
     public function provideEntityTestValues()
     {
         return [
