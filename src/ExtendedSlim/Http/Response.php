@@ -19,7 +19,7 @@ class Response extends SlimHttpResponse
         }
 
         return $this->withJson(
-            new ResponseEntity(
+            new RestApiResponseEntity(
                 $restApiResponse->getData(),
                 $restApiResponse->getReplyCode(),
                 $restApiResponse->getReplyMessage()

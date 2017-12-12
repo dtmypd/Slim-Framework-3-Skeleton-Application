@@ -5,7 +5,7 @@ use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
-use ExtendedSlim\Http\ResponseEntity;
+use ExtendedSlim\Http\RestApiResponseEntity;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -128,7 +128,7 @@ abstract class AbstractEndToEndTest extends AbstractTest
     /**
      * @param Response $response
      *
-     * @return ResponseEntity
+     * @return RestApiResponseEntity
      * @throws Exception
      */
     protected function createResponseEntityFromResponse(Response $response)
@@ -139,6 +139,6 @@ abstract class AbstractEndToEndTest extends AbstractTest
             throw new Exception('Invalid JSON returned.');
         }
 
-        return new ResponseEntity($body->data, $body->replyCode, $body->replyMessage);
+        return new RestApiResponseEntity($body->data, $body->replyCode, $body->replyMessage);
     }
 }

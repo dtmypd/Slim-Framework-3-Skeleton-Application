@@ -2,7 +2,7 @@
 
 use JsonSerializable;
 
-class ResponseEntity implements JsonSerializable
+class RestApiResponseEntity implements JsonSerializable
 {
     /** @var mixed */
     private $data;
