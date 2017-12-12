@@ -1,9 +1,8 @@
 <?php namespace ExtendedSlim\Http;
 
 use Exception;
-use Slim\Http\Response as SlimHttpResponse;
 
-class Response extends SlimHttpResponse
+class Response extends \Slim\Http\Response
 {
     /**
      * @param RestApiResponse $restApiResponse
