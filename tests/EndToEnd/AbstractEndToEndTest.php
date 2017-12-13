@@ -136,6 +136,7 @@ abstract class AbstractEndToEndTest extends AbstractTest
         $body = json_decode((string)$response->getBody());
         if (json_last_error() !== JSON_ERROR_NONE)
         {
+            var_dump((string)$response->getBody()); //@todo: find a better way to display body
             throw new Exception('Invalid JSON returned.');
         }
 
