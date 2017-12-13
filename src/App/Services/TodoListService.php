@@ -41,7 +41,7 @@ class TodoListService
 
         try
         {
-            $this->todoListRepository->create($name, $userId);
+            $this->todoListRepository->create(new TodoList(null, $name, $userId));
 
             $this->connection->commit();
 

@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\Controllers\Api\v1\UserController\ResponseMessageConstants;
+use App\Entities\User;
 use App\Repositories\UserRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
@@ -38,7 +39,7 @@ class UserService
 
         try
         {
-            $this->userRepository->create($name);
+            $this->userRepository->create(new User(null, $name));
 
             $this->connection->commit();
 

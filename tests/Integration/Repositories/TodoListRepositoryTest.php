@@ -1,5 +1,6 @@
 <?php namespace App\Repositories;
 
+use App\Entities\TodoList;
 use DI\DependencyException;
 use DI\NotFoundException;
 use ExtendedSlim\App;
@@ -38,7 +39,7 @@ class TodoListRepositoryTest extends AbstractIntegrationTest
         $expectedName = 'name test';
 
         // Act
-        $this->todoListRepository->create($createName, $createUserId);
+        $this->todoListRepository->create(new TodoList(null, $createName, $createUserId));
 
         // Assert
         $qB   = $this->createQueryBuilder();

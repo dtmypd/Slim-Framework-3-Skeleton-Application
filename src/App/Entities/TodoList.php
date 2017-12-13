@@ -4,26 +4,31 @@ use JsonSerializable;
 
 class TodoList implements JsonSerializable
 {
-    /** @var integer */
+    /** @var int|null */
     private $id;
 
     /** @var string */
     private $name;
 
+    /** @var int */
+    private $userId;
+
     /**
-     * @param int    $id
-     * @param string $name
+     * @param int|null $id
+     * @param string   $name
+     * @param int      $userId
      */
-    public function __construct(int $id, string $name)
+    public function __construct(?int $id, string $name, int $userId)
     {
-        $this->id   = $id;
-        $this->name = $name;
+        $this->id     = $id;
+        $this->name   = $name;
+        $this->userId = $userId;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -37,13 +42,22 @@ class TodoList implements JsonSerializable
     }
 
     /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+
+    /**
      * @return array
      */
-    public function jsonSerialize(): array
+    public function jsonSerialize()
     {
         return [
-            'id'   => $this->getId(),
-            'name' => $this->getName(),
+            'id'     => $this->getId(),
+            'name'   => $this->getName(),
+            'userId' => $this->getUserId(),
         ];
     }
 }

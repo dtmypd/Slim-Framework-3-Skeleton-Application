@@ -7,16 +7,15 @@ use PDO;
 class TodoListRepository extends AbstractRepository
 {
     /**
-     * @param string $name
-     * @param int    $userId
+     * @param TodoList $todoList
      */
-    public function create(string $name, int $userId)
+    public function create(TodoList $todoList)
     {
         $this->getConnection()->insert(
             TodoListTable::TABLE_NAME,
             [
-                'name'    => $name,
-                'user_id' => $userId
+                'name'    => $todoList->getName(),
+                'user_id' => $todoList->getUserId()
             ]
         );
     }
@@ -87,7 +86,8 @@ class TodoListRepository extends AbstractRepository
     {
         return new TodoList(
             $row[TodoListTable::FIELD_ID],
-            $row[TodoListTable::FIELD_NAME]
+            $row[TodoListTable::FIELD_NAME],
+            $row[TodoListTable::FIELD_USER_ID]
         );
     }
 }

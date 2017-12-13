@@ -7,11 +7,11 @@ use PDO;
 class UserRepository extends AbstractRepository
 {
     /**
-     * @param string $name
+     * @param User $user
      */
-    public function create(string $name)
+    public function create(User $user)
     {
-        $this->getConnection()->insert(UserTable::TABLE_NAME, [UserTable::FIELD_USER_NAME => $name]);
+        $this->getConnection()->insert(UserTable::TABLE_NAME, [UserTable::FIELD_USER_NAME => $user->getUserName()]);
     }
 
     /**

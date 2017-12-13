@@ -4,26 +4,26 @@ use JsonSerializable;
 
 class User implements JsonSerializable
 {
-    /** @var integer */
+    /** @var int|null */
     private $id;
 
     /** @var string */
     private $userName;
 
     /**
-     * @param int    $id
-     * @param string $userName
+     * @param int|null $id
+     * @param string   $userName
      */
-    public function __construct(int $id, string $userName)
+    public function __construct(?int $id, string $userName)
     {
         $this->id       = $id;
         $this->userName = $userName;
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
