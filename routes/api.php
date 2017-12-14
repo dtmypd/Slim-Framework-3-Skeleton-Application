@@ -26,4 +26,5 @@ $app->group(
             }
         );
     }
-)->add(new CorsMiddleware(env('CORS_ALLOW_ORIGIN', false)));
+)
+    ->add(new CorsMiddleware(env('CORS_ALLOW_ORIGIN', false)));
