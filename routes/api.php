@@ -2,6 +2,7 @@
 
 use App\Controllers\Api\v1\TodoListController;
 use App\Controllers\Api\v1\UserController;
+use App\Middlewares\CorsMiddleware;
 
 $app->group(
     '/v1',
@@ -25,4 +26,4 @@ $app->group(
             }
         );
     }
-);
+)->add(new CorsMiddleware(env('CORS_ALLOW_ORIGIN', false)));
