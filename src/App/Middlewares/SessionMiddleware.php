@@ -25,7 +25,7 @@ class SessionMiddleware
      *
      * @return ResponseInterface
      */
-    public function __invoke(Request $request, Response $response, $next)
+    public function __invoke(Request $request, Response $response, callable $next)
     {
         $this->sessionService->sessionStart();
 
