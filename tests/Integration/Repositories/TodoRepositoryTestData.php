@@ -3,7 +3,7 @@
 use App\Repositories\UserTable;
 use Tests\AbstractTestData;
 
-class TodoListRepositoryTestData extends AbstractTestData
+class TodoRepositoryTestData extends AbstractTestData
 {
     public function create_insertNewTodo_Perfect()
     {

@@ -1,6 +1,6 @@
 <?php namespace Unit\Entities;
 
-class TodoListTestProvider
+class TodoTestProvider
 {
     /**
      * @return array

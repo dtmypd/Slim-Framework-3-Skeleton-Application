@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-final class TodoListTable
+final class TodoTable
 {
     const TABLE_NAME = 'todo_list';
 

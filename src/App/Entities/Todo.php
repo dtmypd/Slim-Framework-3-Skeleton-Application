@@ -2,7 +2,7 @@
 
 use JsonSerializable;
 
-class TodoList implements JsonSerializable
+class Todo implements JsonSerializable
 {
     /** @var int|null */
     private $id;

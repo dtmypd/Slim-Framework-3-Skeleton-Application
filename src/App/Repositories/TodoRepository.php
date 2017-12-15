@@ -1,35 +1,35 @@
 <?php namespace App\Repositories;
 
-use App\Entities\TodoList;
+use App\Entities\Todo;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use PDO;
 
-class TodoListRepository extends AbstractRepository
+class TodoRepository extends AbstractRepository
 {
     /**
-     * @param TodoList $todoList
+     * @param Todo $todo
      */
-    public function create(TodoList $todoList)
+    public function create(Todo $todo)
     {
         $this->getConnection()->insert(
-            TodoListTable::TABLE_NAME,
+            TodoTable::TABLE_NAME,
             [
-                'name'    => $todoList->getName(),
-                'user_id' => $todoList->getUserId()
+                'name'    => $todo->getName(),
+                'user_id' => $todo->getUserId()
             ]
         );
     }
 
     /**
-     * @return TodoList[]
+     * @return Todo[]
      */
     public function search(): array
     {
         $qB = $this->createQueryBuilder();
 
         $rows = $qB
-            ->select(TodoListTable::ENTITY_FIELDS)
-            ->from(TodoListTable::TABLE_NAME)
+            ->select(TodoTable::ENTITY_FIELDS)
+            ->from(TodoTable::TABLE_NAME)
             ->execute()
             ->fetchAll(PDO::FETCH_ASSOC);
 
@@ -39,17 +39,17 @@ class TodoListRepository extends AbstractRepository
     /**
      * @param $id
      *
-     * @return TodoList
+     * @return Todo
      * @throws RecordNotFoundException
      */
-    public function getById($id): TodoList
+    public function getById($id): Todo
     {
         $qB = $this->createQueryBuilder();
 
         $row = $qB
-            ->select(TodoListTable::ENTITY_FIELDS)
-            ->from(TodoListTable::TABLE_NAME)
-            ->where(TodoListTable::FIELD_ID . ' = ' . $qB->createNamedParameter($id))
+            ->select(TodoTable::ENTITY_FIELDS)
+            ->from(TodoTable::TABLE_NAME)
+            ->where(TodoTable::FIELD_ID . ' = ' . $qB->createNamedParameter($id))
             ->execute()
             ->fetch(PDO::FETCH_ASSOC);
 
@@ -64,7 +64,7 @@ class TodoListRepository extends AbstractRepository
     /**
      * @param array $rows
      *
-     * @return TodoList[]
+     * @return Todo[]
      */
     private function buildEntities(array $rows): array
     {
@@ -80,14 +80,14 @@ class TodoListRepository extends AbstractRepository
     /**
      * @param array $row
      *
-     * @return TodoList
+     * @return Todo
      */
-    private function buildEntity(array $row): TodoList
+    private function buildEntity(array $row): Todo
     {
-        return new TodoList(
-            $row[TodoListTable::FIELD_ID],
-            $row[TodoListTable::FIELD_NAME],
-            $row[TodoListTable::FIELD_USER_ID]
+        return new Todo(
+            $row[TodoTable::FIELD_ID],
+            $row[TodoTable::FIELD_NAME],
+            $row[TodoTable::FIELD_USER_ID]
         );
     }
 }

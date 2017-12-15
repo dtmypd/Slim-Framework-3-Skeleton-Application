@@ -1,8 +1,8 @@
-<?php namespace App\Controllers\Api\v1\TodoListController;
+<?php namespace App\Controllers\Api\v1\TodoController;
 
 use App\Controllers\AbstractAction;
-use App\Requests\TodoListRequests\CreateRequest;
-use App\Services\TodoListService;
+use App\Requests\TodoRequests\CreateRequest;
+use App\Services\TodoService;
 use Exception;
 use ExtendedSlim\Factories\ValidatorFactory;
 use ExtendedSlim\Http\HttpCodeConstants;
@@ -15,7 +15,7 @@ class CreateAction extends AbstractAction
     /**
      * @param Request          $request
      * @param Response         $response
-     * @param TodoListService  $todoListService
+     * @param TodoService      $todoService
      * @param ValidatorFactory $validatorFactory
      *
      * @return Response
@@ -24,7 +24,7 @@ class CreateAction extends AbstractAction
     public function __invoke(
         Request $request,
         Response $response,
-        TodoListService $todoListService,
+        TodoService $todoService,
         ValidatorFactory $validatorFactory
     ): Response {
         $createRequest = new CreateRequest($request->getParam('name'), $request->getParam('user_id'));
@@ -42,7 +42,7 @@ class CreateAction extends AbstractAction
             );
         }
 
-        $restApiResponse = $todoListService->create($request->getParam('name'), $request->getParam('user_id'));
+        $restApiResponse = $todoService->create($request->getParam('name'), $request->getParam('user_id'));
 
         return $response->createRestApiResponse($restApiResponse);
     }

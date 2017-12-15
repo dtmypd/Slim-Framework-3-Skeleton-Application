@@ -1,6 +1,6 @@
 <?php namespace EndToEnd;
 
-use EndToEnd\Api\v1\TodoList\ShowActionTestData;
+use EndToEnd\Api\v1\Todo\ShowActionTestData;
 use Exception;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -24,10 +24,10 @@ class ShowActionTest extends AbstractEndToEndTest
     {
         // Arrange
         (new ShowActionTestData($this->getConnection()))->getInsertedRecord_perfect();
-        $getUri               = '/v1/todo-list/123';
+        $getUri               = '/v1/todo/123';
         $expectedHttpCode     = 200;
-        $expectedTodoListId   = 123;
-        $expectedTodoListName = 'todo 123';
+        $expectedTodoId   = 123;
+        $expectedTodoName = 'todo 123';
 
         // Act
         $response = $this->createGetRequest($getUri);
@@ -36,7 +36,7 @@ class ShowActionTest extends AbstractEndToEndTest
 
         // Assert
         $this->assertEquals($expectedHttpCode, $response->getStatusCode(), 'Status code mismatch.');
-        $this->assertEquals($expectedTodoListId, $responseEntity->getData()->todoList->id, 'Id mismatch.');
-        $this->assertEquals($expectedTodoListName, $responseEntity->getData()->todoList->name, 'Name mismatch.');
+        $this->assertEquals($expectedTodoId, $responseEntity->getData()->todoList->id, 'Id mismatch.');
+        $this->assertEquals($expectedTodoName, $responseEntity->getData()->todoList->name, 'Name mismatch.');
     }
 }

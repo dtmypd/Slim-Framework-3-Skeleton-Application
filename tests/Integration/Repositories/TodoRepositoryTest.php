@@ -1,18 +1,18 @@
 <?php namespace App\Repositories;
 
-use App\Entities\TodoList;
+use App\Entities\Todo;
 use DI\DependencyException;
 use DI\NotFoundException;
 use ExtendedSlim\App;
 use Integration\AbstractIntegrationTest;
-use Integration\Repositories\TodoListRepositoryTestData;
+use Integration\Repositories\TodoRepositoryTestData;
 use InvalidArgumentException;
 use PDO;
 
-class TodoListRepositoryTest extends AbstractIntegrationTest
+class TodoRepositoryTest extends AbstractIntegrationTest
 {
-    /** @var $todoListRepository TodoListRepository */
-    private $todoListRepository;
+    /** @var $todoRepository TodoRepository */
+    private $todoRepository;
 
     /**
      * @throws DependencyException
@@ -22,7 +22,7 @@ class TodoListRepositoryTest extends AbstractIntegrationTest
     {
         parent::setUp();
 
-        $this->todoListRepository = $this->getFromContainer(TodoListRepository::class);
+        $this->todoRepository = $this->getFromContainer(TodoRepository::class);
     }
 
     /**
@@ -33,20 +33,20 @@ class TodoListRepositoryTest extends AbstractIntegrationTest
     public function create_insertNewTodo_Perfect()
     {
         // Arrange
-        (new TodoListRepositoryTestData($this->getConnection()))->create_insertNewTodo_Perfect();
+        (new TodoRepositoryTestData($this->getConnection()))->create_insertNewTodo_Perfect();
         $createName   = 'name test';
         $createUserId = 1;
         $expectedName = 'name test';
 
         // Act
-        $this->todoListRepository->create(new TodoList(null, $createName, $createUserId));
+        $this->todoRepository->create(new Todo(null, $createName, $createUserId));
 
         // Assert
         $qB   = $this->createQueryBuilder();
         $rows = $qB
             ->select(1)
-            ->from(TodoListTable::TABLE_NAME)
-            ->where(TodoListTable::FIELD_NAME . ' = ' . $qB->createNamedParameter($expectedName))
+            ->from(TodoTable::TABLE_NAME)
+            ->where(TodoTable::FIELD_NAME . ' = ' . $qB->createNamedParameter($expectedName))
             ->execute()
             ->fetchAll(PDO::FETCH_ASSOC);
 

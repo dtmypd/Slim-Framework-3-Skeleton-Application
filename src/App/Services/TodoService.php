@@ -1,8 +1,8 @@
 <?php namespace App\Services;
 
-use App\Controllers\Api\v1\TodoListController\ResponseMessageConstants;
-use App\Entities\TodoList;
-use App\Repositories\TodoListRepository;
+use App\Controllers\Api\v1\TodoController\ResponseMessageConstants;
+use App\Entities\Todo;
+use App\Repositories\TodoRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
@@ -10,22 +10,22 @@ use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\RestApiResponse;
 use Exception;
 
-class TodoListService
+class TodoService
 {
-    /** @var TodoListRepository */
-    private $todoListRepository;
+    /** @var TodoRepository */
+    private $todoRepository;
 
     /** @var Connection */
     private $connection;
 
     /**
-     * @param TodoListRepository $todoListRepository
-     * @param Connection         $connection
+     * @param TodoRepository $todoRepository
+     * @param Connection     $connection
      */
-    public function __construct(TodoListRepository $todoListRepository, Connection $connection)
+    public function __construct(TodoRepository $todoRepository, Connection $connection)
     {
-        $this->todoListRepository = $todoListRepository;
-        $this->connection         = $connection;
+        $this->todoRepository = $todoRepository;
+        $this->connection     = $connection;
     }
 
     /**
@@ -41,7 +41,7 @@ class TodoListService
 
         try
         {
-            $this->todoListRepository->create(new TodoList(null, $name, $userId));
+            $this->todoRepository->create(new Todo(null, $name, $userId));
 
             $this->connection->commit();
 
@@ -61,21 +61,21 @@ class TodoListService
     }
 
     /**
-     * @return TodoList[]
+     * @return Todo[]
      */
     public function search(): array
     {
-        return $this->todoListRepository->search();
+        return $this->todoRepository->search();
     }
 
     /**
      * @param integer $id
      *
-     * @return TodoList
+     * @return Todo
      * @throws RecordNotFoundException
      */
-    public function getById(int $id): TodoList
+    public function getById(int $id): Todo
     {
-        return $this->todoListRepository->getById($id);
+        return $this->todoRepository->getById($id);
     }
 }

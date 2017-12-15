@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Api\v1\TodoListController;
+<?php namespace App\Controllers\Api\v1\TodoController;
 
 final class ResponseMessageConstants
 {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Controllers\Api\v1\TodoListController;
+use App\Controllers\Api\v1\TodoController;
 use App\Controllers\Api\v1\UserController;
 use App\Middlewares\CorsMiddleware;
 
@@ -9,12 +9,12 @@ $app->group(
     function ()
     {
         $this->group(
-            '/todo-list',
+            '/todo',
             function ()
             {
-                $this->post('/create', TodoListController\CreateAction::class);
-                $this->get('', TodoListController\ListAction::class);
-                $this->get('/{id}', TodoListController\ShowAction::class);
+                $this->post('/create', TodoController\CreateAction::class);
+                $this->get('', TodoController\ListAction::class);
+                $this->get('/{id}', TodoController\ShowAction::class);
             }
         );
 

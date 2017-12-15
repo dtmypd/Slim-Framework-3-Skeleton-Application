@@ -1,6 +1,6 @@
-<?php namespace App\Controllers\Api\v1\TodoListController;
+<?php namespace App\Controllers\Api\v1\TodoController;
 
-use App\Services\TodoListService;
+use App\Services\TodoService;
 use Exception;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
@@ -12,10 +12,10 @@ use Slim\Route;
 class ShowAction
 {
     /**
-     * @param Request         $request
-     * @param Response        $response
-     * @param Route           $route
-     * @param TodoListService $todoListService
+     * @param Request     $request
+     * @param Response    $response
+     * @param Route       $route
+     * @param TodoService $todoService
      *
      * @return Response
      * @throws Exception
@@ -24,14 +24,14 @@ class ShowAction
         Request $request,
         Response $response,
         Route $route,
-        TodoListService $todoListService
+        TodoService $todoService
     ): Response {
         try
         {
             return $response->createRestApiResponse(
                 new RestApiResponse(
                     [
-                        'todoList' => $todoListService->getById((int)$route->getArgument('id'))
+                        'todoList' => $todoService->getById((int)$route->getArgument('id'))
                     ]
                 )
             );

@@ -2,7 +2,7 @@
 
 use Tests\AbstractTest;
 
-class TodoListTest extends AbstractTest
+class TodoTest extends AbstractTest
 {
     /**
      * @test
@@ -18,12 +18,12 @@ class TodoListTest extends AbstractTest
         $expectedUserId = 11;
 
         // Act
-        $todoList = new TodoList($id, $name, $userId);
+        $todo = new Todo($id, $name, $userId);
 
         // Assert
-        $this->assertEquals($expectedId, $todoList->getId(), 'Entity id mismatch.');
-        $this->assertEquals($expectedName, $todoList->getName(), 'Entity name mismatch.');
-        $this->assertEquals($expectedUserId, $todoList->getUserId(), 'Entity user id mismatch.');
+        $this->assertEquals($expectedId, $todo->getId(), 'Entity id mismatch.');
+        $this->assertEquals($expectedName, $todo->getName(), 'Entity name mismatch.');
+        $this->assertEquals($expectedUserId, $todo->getUserId(), 'Entity user id mismatch.');
     }
 
     /**
@@ -36,7 +36,7 @@ class TodoListTest extends AbstractTest
      * @param int      $userId
      * @param int      $expectedUserId
      *
-     * @dataProvider \Unit\Entities\TodoListTestProvider::provideEntityTestValues()
+     * @dataProvider \Unit\Entities\TodoTestProvider::provideEntityTestValues()
      */
     public function entityTestWithProvider_Perfect_Perfect(
         ?int $id,
@@ -48,11 +48,11 @@ class TodoListTest extends AbstractTest
     ) {
         // Arrange - provided
         // Act
-        $todoList = new TodoList($id, $name, $userId);
+        $todo = new Todo($id, $name, $userId);
 
         // Assert
-        $this->assertEquals($expectedId, $todoList->getId(), 'Entity id mismatch.');
-        $this->assertEquals($expectedName, $todoList->getName(), 'Entity name mismatch.');
-        $this->assertEquals($expectedUserId, $todoList->getUserId(), 'Entity use id mismatch.');
+        $this->assertEquals($expectedId, $todo->getId(), 'Entity id mismatch.');
+        $this->assertEquals($expectedName, $todo->getName(), 'Entity name mismatch.');
+        $this->assertEquals($expectedUserId, $todo->getUserId(), 'Entity use id mismatch.');
     }
 }

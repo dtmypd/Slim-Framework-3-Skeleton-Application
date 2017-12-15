@@ -1,4 +1,4 @@
-<?php namespace App\Requests\TodoListRequests;
+<?php namespace App\Requests\TodoRequests;
 
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;

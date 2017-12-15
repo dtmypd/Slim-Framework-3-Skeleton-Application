@@ -1,6 +1,6 @@
-<?php namespace EndToEnd\Api\v1\TodoList;
+<?php namespace EndToEnd\Api\v1\Todo;
 
-use App\Repositories\TodoListTable;
+use App\Repositories\TodoTable;
 use App\Repositories\UserTable;
 use Tests\AbstractTestData;
 
@@ -17,11 +17,11 @@ class ShowActionTestData extends AbstractTestData
         );
 
         $this->getConnection()->insert(
-            TodoListTable::TABLE_NAME,
+            TodoTable::TABLE_NAME,
             [
-                TodoListTable::FIELD_ID      => 123,
-                TodoListTable::FIELD_USER_ID => 111,
-                TodoListTable::FIELD_NAME    => 'todo 123',
+                TodoTable::FIELD_ID      => 123,
+                TodoTable::FIELD_USER_ID => 111,
+                TodoTable::FIELD_NAME    => 'todo 123',
             ]
         );
     }
