@@ -12,6 +12,7 @@ $app->group(
         $this->get('/translation-demo', IndexController\TranslationDemoAction::class);
         $this->get('/session-demo', IndexController\SessionDemoAction::class);
         $this->get('/enum-demo', IndexController\EnumDemoAction::class);
+        $this->get('/cache-demo', IndexController\CacheDemoAction::class);
     }
 )
     ->add(new SessionMiddleware($app->getContainer()->get(SessionService::class)));

@@ -24,11 +24,12 @@ class UserRepository extends AbstractRepository
     {
         $qB  = $this->createQueryBuilder();
         $row = $qB
-            ->select(1)
+            ->select(UserTable::ENTITY_FIELDS)
             ->from(UserTable::TABLE_NAME)
             ->where(UserTable::FIELD_USER_NAME . ' = ' . $qB->createNamedParameter($name))
+            ->setMaxResults(1)
             ->execute()
-            ->fetchAll(PDO::FETCH_ASSOC);
+            ->fetch(PDO::FETCH_ASSOC);
 
         if (null === $row)
         {

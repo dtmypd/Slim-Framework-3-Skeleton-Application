@@ -1,11 +1,13 @@
 <?php namespace App\Services;
 
 use App\Controllers\Api\v1\UserController\ResponseMessageConstants;
+use App\Decorators\UserRepositoryCacheDecorator;
 use App\Entities\User;
 use App\Repositories\UserRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Exception;
+use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\RestApiResponse;
 
@@ -17,14 +19,33 @@ class UserService
     /** @var Connection */
     private $connection;
 
+    /** @var UserRepositoryCacheDecorator */
+    private $userRepositoryCacheDecorator;
+
     /**
-     * @param UserRepository $userRepository
-     * @param Connection     $connection
+     * @param UserRepository               $userRepository
+     * @param UserRepositoryCacheDecorator $userRepositoryCacheDecorator
+     * @param Connection                   $connection
      */
-    public function __construct(UserRepository $userRepository, Connection $connection)
+    public function __construct(
+        UserRepository $userRepository,
+        UserRepositoryCacheDecorator $userRepositoryCacheDecorator,
+        Connection $connection
+    ) {
+        $this->userRepository               = $userRepository;
+        $this->connection                   = $connection;
+        $this->userRepositoryCacheDecorator = $userRepositoryCacheDecorator;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return User
+     * @throws RecordNotFoundException
+     */
+    public function findByName(string $name)
     {
-        $this->userRepository = $userRepository;
-        $this->connection     = $connection;
+        return $this->userRepositoryCacheDecorator->findByName($name);
     }
 
     /**

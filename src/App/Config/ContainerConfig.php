@@ -8,6 +8,7 @@ use \DI\Bridge\Slim\ControllerInvoker;
 use \DI\Container;
 use Doctrine\DBAL\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
+use ExtendedSlim\Factories\MemcachedFactory;
 use ExtendedSlim\Factories\TranslatorFactory;
 use ExtendedSlim\Handlers\Error;
 use ExtendedSlim\Handlers\NotAllowed;
@@ -21,6 +22,7 @@ use Invoker\ParameterResolver\AssociativeArrayResolver;
 use Invoker\ParameterResolver\Container\TypeHintContainerResolver;
 use Invoker\ParameterResolver\DefaultValueResolver;
 use Invoker\ParameterResolver\ResolverChain;
+use Memcached;
 use Slim\Http\Environment;
 use Slim\Http\Headers;
 use Slim\Router;
@@ -92,6 +94,7 @@ class ContainerConfig
             ContainerInterface::class                    => DI\get(Container::class),
             Connection::class                            => DI\factory([ConnectionFactory::class, 'create']),
             Translator::class                            => DI\factory([TranslatorFactory::class, 'create']),
+            Memcached::class                             => DI\factory([MemcachedFactory::class, 'create']),
         ];
     }
 
