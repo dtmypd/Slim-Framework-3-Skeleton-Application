@@ -1,6 +1,7 @@
 <?php namespace App\Repositories;
 
 use App\Entities\Todo;
+use App\ParameterObjects\PagerParameterObject;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use PDO;
 
@@ -21,15 +22,19 @@ class TodoRepository extends AbstractRepository
     }
 
     /**
+     * @param PagerParameterObject $pagerParameterObject
+     *
      * @return Todo[]
      */
-    public function search(): array
+    public function search(PagerParameterObject $pagerParameterObject): array
     {
         $qB = $this->createQueryBuilder();
 
         $rows = $qB
             ->select(TodoTable::ENTITY_FIELDS)
             ->from(TodoTable::TABLE_NAME)
+            ->setMaxResults($pagerParameterObject->getLimit())
+            ->setFirstResult($pagerParameterObject->getOffset())
             ->execute()
             ->fetchAll(PDO::FETCH_ASSOC);
 

@@ -2,6 +2,7 @@
 
 use App\Controllers\Api\v1\TodoController\ResponseMessageConstants;
 use App\Entities\Todo;
+use App\ParameterObjects\PagerParameterObject;
 use App\Repositories\TodoRepository;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
@@ -61,11 +62,15 @@ class TodoService
     }
 
     /**
+     * @param int $page
+     *
      * @return Todo[]
      */
-    public function search(): array
+    public function search(int $page): array
     {
-        return $this->todoRepository->search();
+        $perPage = 2;
+
+        return $this->todoRepository->search(new PagerParameterObject($perPage, ($page - 1) * $perPage));
     }
 
     /**
