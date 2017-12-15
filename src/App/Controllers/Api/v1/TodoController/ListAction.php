@@ -43,12 +43,6 @@ class ListAction extends AbstractAction
             );
         }
 
-        return $response->createRestApiResponse(
-            new RestApiResponse(
-                [
-                    'todoList' => $todoService->search($listRequest->getPage())
-                ]
-            )
-        );
+        return $response->createRestApiResponse($todoService->search($listRequest->getPage()));
     }
 }

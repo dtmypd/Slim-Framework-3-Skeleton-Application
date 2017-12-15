@@ -4,6 +4,7 @@ use App\Controllers\Api\v1\TodoController\ResponseMessageConstants;
 use App\Entities\Todo;
 use App\ParameterObjects\PagerParameterObject;
 use App\Repositories\TodoRepository;
+use App\ValueObjects\PaginatedTodoListValueObject;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\ConnectionException;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
@@ -64,13 +65,42 @@ class TodoService
     /**
      * @param int $page
      *
-     * @return Todo[]
+     * @return RestApiResponse
+     * @throws ConnectionException
      */
-    public function search(int $page): array
+    public function search(int $page): RestApiResponse
     {
         $perPage = 2;
 
-        return $this->todoRepository->search(new PagerParameterObject($perPage, ($page - 1) * $perPage));
+        $this->connection->beginTransaction();
+        $todoList  = $this->todoRepository->search(new PagerParameterObject($perPage, ($page - 1) * $perPage));
+        $tableRows = $this->todoRepository->getTableRows();
+        $this->connection->commit();
+
+        return new RestApiResponse(
+            new PaginatedTodoListValueObject($todoList, $this->paginatorBuilder($tableRows, $perPage, $page))
+        );
+    }
+
+    /**
+     * @param int $tableRows
+     * @param int $perPage
+     * @param int $page
+     *
+     * @return array
+     */
+    private function paginatorBuilder(int $tableRows, int $perPage, int $page)
+    {
+        $lastPage = round($tableRows / $perPage);
+
+        return [
+            'tableRows'    => $tableRows,
+            'perPage'      => $perPage,
+            'currentPage'  => $page,
+            'lastPage'     => $lastPage,
+            'nextPage'     => $page < $lastPage ? $page + 1 : $lastPage,
+            'previousPage' => $page > 1 ? $page - 1 : $page,
+        ];
     }
 
     /**

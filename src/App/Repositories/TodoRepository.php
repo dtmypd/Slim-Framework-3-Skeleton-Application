@@ -42,6 +42,18 @@ class TodoRepository extends AbstractRepository
     }
 
     /**
+     * @return int
+     */
+    public function getTableRows() {
+        return $this
+            ->createQueryBuilder()
+            ->select('count(*)')
+            ->from(TodoTable::TABLE_NAME)
+            ->execute()
+            ->fetch(PDO::FETCH_COLUMN);
+    }
+
+    /**
      * @param $id
      *
      * @return Todo
