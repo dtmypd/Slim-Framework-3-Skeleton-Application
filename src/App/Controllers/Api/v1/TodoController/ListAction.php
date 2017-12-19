@@ -28,8 +28,7 @@ class ListAction extends AbstractAction
         ValidatorFactory $validatorFactory
     ): Response {
         $listRequest = new ListRequest($request->getParam('page', 0));
-
-        $violations = $validatorFactory->create()->validate($listRequest);
+        $violations  = $validatorFactory->create()->validate($listRequest);
 
         if ($violations->count() > 0)
         {

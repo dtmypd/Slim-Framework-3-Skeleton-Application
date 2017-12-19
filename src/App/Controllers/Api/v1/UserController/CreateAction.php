@@ -44,7 +44,7 @@ class CreateAction extends AbstractAction
             );
         }
 
-        $restApiResponse = $userService->create($request->getParam('name'));
+        $restApiResponse = $userService->create($createRequest->getName());
 
         return $response->createRestApiResponse($restApiResponse);
     }

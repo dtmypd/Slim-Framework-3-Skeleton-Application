@@ -10,18 +10,35 @@ class CreateRequest
     /** @var string */
     protected $name;
 
-    /** @var int|null */
+    /** @var string */
     protected $userId;
 
     /**
-     * @param string   $name
-     * @param int|null $userId
+     * @param string $name
+     * @param string $userId
      */
-    public function __construct(string $name, int $userId)
+    public function __construct(string $name, string $userId)
     {
         $this->name   = $name;
         $this->userId = $userId;
     }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return (int)$this->userId;
+    }
+
 
     /**
      * @param ClassMetadata $metadata

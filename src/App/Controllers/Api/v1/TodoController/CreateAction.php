@@ -42,7 +42,7 @@ class CreateAction extends AbstractAction
             );
         }
 
-        $restApiResponse = $todoService->create($request->getParam('name'), $request->getParam('user_id'));
+        $restApiResponse = $todoService->create($createRequest->getName(), $createRequest->getUserId());
 
         return $response->createRestApiResponse($restApiResponse);
     }

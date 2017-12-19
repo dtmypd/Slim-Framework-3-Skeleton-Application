@@ -106,11 +106,22 @@ class TodoService
     /**
      * @param integer $id
      *
-     * @return Todo
-     * @throws RecordNotFoundException
+     * @return RestApiResponse
      */
-    public function getById(int $id): Todo
+    public function getById(int $id): RestApiResponse
     {
-        return $this->todoRepository->getById($id);
+        try
+        {
+            return new RestApiResponse($this->todoRepository->getById($id));
+        }
+        catch (RecordNotFoundException $e)
+        {
+           return new RestApiResponse(
+                ['id' => $id],
+                ResponseMessageConstants::TODO_ITEM_ERROR_ID,
+                ResponseMessageConstants::TODO_ITEM_ERROR_MESSAGE,
+                HttpCodeConstants::BAD_REQUEST
+            );
+        }
     }
 }
