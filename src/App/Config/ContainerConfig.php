@@ -25,7 +25,7 @@ use Invoker\ParameterResolver\ResolverChain;
 use Memcached;
 use Slim\Http\Environment;
 use Slim\Http\Headers;
-use Slim\Router;
+use ExtendedSlim\Router;
 use Symfony\Component\Translation\Translator;
 
 class ContainerConfig
