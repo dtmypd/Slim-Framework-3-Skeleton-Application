@@ -2,7 +2,7 @@
 
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 class CreateRequest
@@ -39,7 +39,6 @@ class CreateRequest
         return (int)$this->userId;
     }
 
-
     /**
      * @param ClassMetadata $metadata
      */
@@ -48,6 +47,6 @@ class CreateRequest
         $metadata->addPropertyConstraint('name', new NotBlank());
         $metadata->addPropertyConstraint('name', new Length(['min' => 5, 'max' => 20]));
         $metadata->addPropertyConstraint('userId', new NotBlank());
-        $metadata->addPropertyConstraint('userId', new Type('integer'));
+        $metadata->addPropertyConstraint('userId', new Regex('/^\d+$/'));
     }
 }
