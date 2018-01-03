@@ -3,6 +3,27 @@
 use App\Controllers\Api\v1\TodoController;
 use App\Controllers\Api\v1\UserController;
 use App\Middlewares\CorsMiddleware;
+use ExtendedSlim\Http\Request;
+use ExtendedSlim\Http\Response;
+
+$corsAllowOrigin = env('CORS_ALLOW_ORIGIN', false);
+
+if (false !== $corsAllowOrigin)
+{
+    $app->options(
+        '/{routes:.+}',
+        function (Request $request, Response $response) use ($corsAllowOrigin)
+        {
+            return $response
+                ->withHeader('Access-Control-Allow-Origin', $corsAllowOrigin)
+                ->withHeader(
+                    'Access-Control-Allow-Headers',
+                    'X-Requested-With, Content-Type, Accept, Origin, Authorization'
+                )
+                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        }
+    );
+}
 
 $app->group(
     '/v1',
@@ -27,4 +48,5 @@ $app->group(
         );
     }
 )
-    ->add(new CorsMiddleware(env('CORS_ALLOW_ORIGIN', false)));
+    ->add(new CorsMiddleware($corsAllowOrigin));
+

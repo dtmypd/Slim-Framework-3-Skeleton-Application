@@ -26,15 +26,15 @@ class CorsMiddleware
      */
     public function __invoke(Request $request, Response $response, callable $next)
     {
-        /** @var Response $response */
-        $response = $next($request, $response);
+        /** @var Response $next */
+        $next = $next($request, $response);
 
         if (false === $this->allowOrigin)
         {
-            return $response;
+            return $next;
         }
 
-        return $response
+        return $next
             ->withHeader('Access-Control-Allow-Origin', $this->allowOrigin)
             ->withHeader(
                 'Access-Control-Allow-Headers',
