@@ -6,21 +6,15 @@ use App\Middlewares\CorsMiddleware;
 use ExtendedSlim\Http\Request;
 use ExtendedSlim\Http\Response;
 
-$corsAllowOrigin = env('CORS_ALLOW_ORIGIN', false);
+$corsMiddleware = new CorsMiddleware(env('CORS_ALLOW_ORIGIN', false));
 
-if (false !== $corsAllowOrigin)
+if ($corsMiddleware->hasAllowOrigin())
 {
     $app->options(
         '/{routes:.+}',
-        function (Request $request, Response $response) use ($corsAllowOrigin)
+        function (Request $request, Response $response) use ($corsMiddleware)
         {
-            return $response
-                ->withHeader('Access-Control-Allow-Origin', $corsAllowOrigin)
-                ->withHeader(
-                    'Access-Control-Allow-Headers',
-                    'X-Requested-With, Content-Type, Accept, Origin, Authorization'
-                )
-                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            return $corsMiddleware->setHeaders($response);
         }
     );
 }
@@ -48,5 +42,5 @@ $app->group(
         );
     }
 )
-    ->add(new CorsMiddleware($corsAllowOrigin));
+    ->add($corsMiddleware);
 

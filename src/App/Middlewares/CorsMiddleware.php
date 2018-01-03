@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class CorsMiddleware
 {
-    /** @var string */
+    /** @var string|null */
     private $allowOrigin;
 
     /**
@@ -15,6 +15,14 @@ class CorsMiddleware
     public function __construct(string $allowOrigin)
     {
         $this->allowOrigin = $allowOrigin;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAllowOrigin()
+    {
+        return null !== $this->allowOrigin;
     }
 
     /**
@@ -34,7 +42,17 @@ class CorsMiddleware
             return $next;
         }
 
-        return $next
+        return $next;
+    }
+
+    /**
+     * @param Response $response
+     *
+     * @return Response $response
+     */
+    public function setHeaders(Response $response)
+    {
+        return $response
             ->withHeader('Access-Control-Allow-Origin', $this->allowOrigin)
             ->withHeader(
                 'Access-Control-Allow-Headers',
