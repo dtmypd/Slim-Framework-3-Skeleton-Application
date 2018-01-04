@@ -1,5 +1,7 @@
 <?php
 
+require_once 'src/ExtendedSlim/Helpers.php';
+
 use ExtendedSlim\App\Config;
 
 try
