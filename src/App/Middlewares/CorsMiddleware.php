@@ -37,12 +37,12 @@ class CorsMiddleware
         /** @var Response $next */
         $next = $next($request, $response);
 
-        if (false === $this->allowOrigin)
+        if (!$this->hasAllowOrigin())
         {
             return $next;
         }
 
-        return $next;
+        return $this->setHeaders($next);
     }
 
     /**
