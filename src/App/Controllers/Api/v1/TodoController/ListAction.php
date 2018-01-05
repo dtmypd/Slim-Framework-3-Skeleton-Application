@@ -27,7 +27,8 @@ class ListAction extends AbstractAction
         TodoService $todoService,
         ValidatorFactory $validatorFactory
     ): Response {
-        $listRequest = new ListRequest($request->getParam('page', 0));
+        $listRequest = new ListRequest($request->getParam('page', 1));
+        $perPage     = 2;
         $violations  = $validatorFactory->create()->validate($listRequest);
 
         if ($violations->count() > 0)
@@ -42,6 +43,6 @@ class ListAction extends AbstractAction
             );
         }
 
-        return $response->createRestApiResponse($todoService->search($listRequest->getPage()));
+        return $response->createRestApiResponse($todoService->search($listRequest->getPage(), $perPage));
     }
 }

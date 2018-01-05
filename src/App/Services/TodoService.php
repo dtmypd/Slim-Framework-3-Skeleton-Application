@@ -64,14 +64,13 @@ class TodoService
 
     /**
      * @param int $page
+     * @param int $perPage
      *
      * @return RestApiResponse
      * @throws ConnectionException
      */
-    public function search(int $page): RestApiResponse
+    public function search(int $page, int $perPage): RestApiResponse
     {
-        $perPage = 2;
-
         $this->connection->beginTransaction();
         $todoList  = $this->todoRepository->search(new PagerParameterObject($perPage, ($page - 1) * $perPage));
         $tableRows = $this->todoRepository->getTableRows();
