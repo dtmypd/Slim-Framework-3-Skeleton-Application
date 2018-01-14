@@ -22,6 +22,27 @@ Select the server to bind to, then select the SonarQube project.
 
 Click Apply
 
+## Command line
+
+Download SonarQube scanner from:
+https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+
+Update the global settings to point to your SonarQube server by editing <install_directory>/conf/sonar-scanner.properties:
+
+```
+#----- Default SonarQube server
+sonar.host.url=http://159.89.110.192:9000
+```
+
+Set the ```sonar.login``` parameter to your token
+
+Execute the following command in the project directory where the ```sonar-project.properties``` file is located:
+```
+sonar-scanner
+```
+Results are visible on the SonarQube server
+
+
 ### Naming conventions
 - Use engilsh names only
 - Use CamelCase names for classes
