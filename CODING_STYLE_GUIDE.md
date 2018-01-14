@@ -2,6 +2,26 @@
 
 ## PHP
 
+### Using the SonarQube server:
+## PHPStorm:
+In PHPStorm go to ``` Settings -> Plugins```
+Search for SonarLint. Install it.
+
+Restart PHPStorm then go to ```Settings -> Other settings -> SonarLint General settings```.
+
+Add a new SonarQube server with the following address:
+http://159.89.110.192:9000
+
+Set authentication method then click finish.
+
+Go to ```Settings -> Other settings -> SonarLint Project settings```
+
+Set ```Enable binding to remote SonarQube server```
+
+Select the server to bind to, then select the SonarQube project.
+
+Click Apply
+
 ### Naming conventions
 - Use engilsh names only
 - Use CamelCase names for classes
