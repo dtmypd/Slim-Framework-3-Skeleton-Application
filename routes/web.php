@@ -13,6 +13,7 @@ $app->group(
         $this->get('/session-demo', IndexController\SessionDemoAction::class);
         $this->get('/enum-demo', IndexController\EnumDemoAction::class);
         $this->get('/cache-demo', IndexController\CacheDemoAction::class);
+        $this->get('/cli-get-demo', IndexController\CliGetDemoAction::class);
     }
 )
     ->add(new SessionMiddleware($app->getContainer()->get(SessionService::class)));
