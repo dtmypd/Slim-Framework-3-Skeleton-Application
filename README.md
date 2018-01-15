@@ -17,7 +17,7 @@
 * End-to-end test demo (soon)
 
 
-### DBAL: Doctrine2 query builder 
+### DBAL: Doctrine2 query builder
 * [Repository](https://github.com/doctrine/dbal)
 * [Documentation](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest)
 
@@ -47,3 +47,5 @@ migration by .env.test: $ vendor/bin/phinx migrate -e test
 
 ### PHP Enum This is a native PHP implementation to add enumeration support to PHP >= 5.3.
 * [Documentation/Repository](https://github.com/marc-mabe/php-enum)
+
+## [See the coding style guide](CODING_STYLE_GUIDE.md)
