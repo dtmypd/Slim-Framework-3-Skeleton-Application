@@ -13,9 +13,9 @@ use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/ExtendedSlim/Helpers.php';
+require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
 
-(new Config())->envSetup();
+(new Config(realpath('../')))->envSetup();
 $app = new App();
 
 try

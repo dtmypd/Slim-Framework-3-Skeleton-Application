@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/ExtendedSlim/Helpers.php';
+require_once 'vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
 
 use ExtendedSlim\App\Config;
 
@@ -20,7 +20,7 @@ catch (Exception $e)
     $dotenvFile = '';
 }
 
-(new Config())->envSetup($dotenvFile);
+(new Config(realpath(__DIR__)))->envSetup($dotenvFile);
 
 return [
     'paths'        => [

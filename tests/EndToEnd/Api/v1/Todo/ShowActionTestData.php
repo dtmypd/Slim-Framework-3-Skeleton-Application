@@ -2,7 +2,7 @@
 
 use App\Repositories\TodoTable;
 use App\Repositories\UserTable;
-use Tests\AbstractTestData;
+use ExtendedSlim\Tests\AbstractTestData;
 
 class ShowActionTestData extends AbstractTestData
 {

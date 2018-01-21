@@ -14,7 +14,7 @@ use Slim\Exception\NotFoundException;
 use ExtendedSlim\Http\Response;
 use ExtendedSlim\Http\Request;
 use Slim\Http\Environment;
-use Tests\AbstractTest;
+use ExtendedSlim\Tests\AbstractTest;
 
 abstract class AbstractEndToEndTest extends AbstractTest
 {
@@ -33,8 +33,7 @@ abstract class AbstractEndToEndTest extends AbstractTest
         parent::setUp();
 
         require_once __DIR__ . '/../../vendor/autoload.php';
-
-        (new Config())->envSetup();
+        (new Config(realpath(__DIR__ . "/../../")))->envSetup();
         $app = new App();
 
         require __DIR__ . '/../../routes/api.php';

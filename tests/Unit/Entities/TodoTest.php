@@ -1,6 +1,6 @@
 <?php namespace App\Entities;
 
-use Tests\AbstractTest;
+use ExtendedSlim\Tests\AbstractTest;
 
 class TodoTest extends AbstractTest
 {

@@ -93,7 +93,8 @@ class ContainerConfig
             'callableResolver'                           => DI\object(CallableResolver::class),
             ContainerInterface::class                    => DI\get(Container::class),
             Connection::class                            => DI\factory([ConnectionFactory::class, 'create']),
-            Translator::class                            => DI\factory([TranslatorFactory::class, 'create']),
+            Translator::class                            => DI\factory([TranslatorFactory::class, 'create'])
+                ->parameter('translationResourcePath', realpath(__DIR__ . '/../resources/translations')),
             Memcached::class                             => DI\factory([MemcachedFactory::class, 'create']),
         ];
     }

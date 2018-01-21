@@ -1,7 +1,7 @@
 <?php namespace Integration\Repositories;
 
 use App\Repositories\UserTable;
-use Tests\AbstractTestData;
+use ExtendedSlim\Tests\AbstractTestData;
 
 class TodoRepositoryTestData extends AbstractTestData
 {
