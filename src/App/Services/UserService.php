@@ -31,7 +31,8 @@ class UserService
         UserRepository $userRepository,
         UserRepositoryCacheDecorator $userRepositoryCacheDecorator,
         Connection $connection
-    ) {
+    )
+    {
         $this->userRepository               = $userRepository;
         $this->connection                   = $connection;
         $this->userRepositoryCacheDecorator = $userRepositoryCacheDecorator;

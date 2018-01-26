@@ -115,7 +115,7 @@ class TodoService
         }
         catch (RecordNotFoundException $e)
         {
-           return new RestApiResponse(
+            return new RestApiResponse(
                 ['id' => $id],
                 ResponseMessageConstants::TODO_ITEM_ERROR_ID,
                 ResponseMessageConstants::TODO_ITEM_ERROR_MESSAGE,
