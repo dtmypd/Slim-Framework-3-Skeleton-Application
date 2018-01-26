@@ -5,7 +5,7 @@ use App\Entities\Todo;
 use App\ParameterObjects\PagerParameterObject;
 use App\Repositories\TodoRepository;
 use App\ValueObjects\PaginatedTodoListValueObject;
-use Doctrine\DBAL\Connection;
+use ExtendedSlim\Database\Connection;
 use Doctrine\DBAL\ConnectionException;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;

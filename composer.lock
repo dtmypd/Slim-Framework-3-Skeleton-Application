@@ -935,12 +935,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/professionhu/extended-slim.git",
-                "reference": "6e6af4e1918d930e7dcd1a352e91f6a0a3b1dbda"
+                "reference": "c3e19c5bd86d7508e6a5177567d351e2fd6f516b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/6e6af4e1918d930e7dcd1a352e91f6a0a3b1dbda",
-                "reference": "6e6af4e1918d930e7dcd1a352e91f6a0a3b1dbda",
+                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/c3e19c5bd86d7508e6a5177567d351e2fd6f516b",
+                "reference": "c3e19c5bd86d7508e6a5177567d351e2fd6f516b",
                 "shasum": ""
             },
             "require": {
@@ -976,7 +976,7 @@
                 "source": "https://github.com/professionhu/extended-slim/tree/master",
                 "issues": "https://github.com/professionhu/extended-slim/issues"
             },
-            "time": "2018-01-21T10:34:31+00:00"
+            "time": "2018-01-26T17:58:58+00:00"
         },
         {
             "name": "psr/container",

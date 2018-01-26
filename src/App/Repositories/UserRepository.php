@@ -24,6 +24,7 @@ class UserRepository extends AbstractRepository
     {
         $qB  = $this->createQueryBuilder();
         $row = $qB
+            ->setQueryId(__METHOD__)
             ->select(UserTable::ENTITY_FIELDS)
             ->from(UserTable::TABLE_NAME)
             ->where(UserTable::FIELD_USER_NAME . ' = ' . $qB->createNamedParameter($name))

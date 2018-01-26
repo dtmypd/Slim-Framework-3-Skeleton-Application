@@ -4,7 +4,7 @@ use App\Controllers\Api\v1\UserController\ResponseMessageConstants;
 use App\Decorators\UserRepositoryCacheDecorator;
 use App\Entities\User;
 use App\Repositories\UserRepository;
-use Doctrine\DBAL\Connection;
+use ExtendedSlim\Database\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\Exceptions\RecordNotFoundException;

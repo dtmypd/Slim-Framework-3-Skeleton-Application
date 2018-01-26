@@ -6,7 +6,7 @@ use \DI;
 use \DI\Bridge\Slim\CallableResolver;
 use \DI\Bridge\Slim\ControllerInvoker;
 use \DI\Container;
-use Doctrine\DBAL\Connection;
+use ExtendedSlim\Database\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
 use ExtendedSlim\Factories\MemcachedFactory;
 use ExtendedSlim\Factories\TranslatorFactory;

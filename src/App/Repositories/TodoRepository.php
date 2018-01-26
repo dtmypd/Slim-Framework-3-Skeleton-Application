@@ -31,6 +31,7 @@ class TodoRepository extends AbstractRepository
         $qB = $this->createQueryBuilder();
 
         $rows = $qB
+            ->setQueryId(__METHOD__)
             ->select(TodoTable::ENTITY_FIELDS)
             ->from(TodoTable::TABLE_NAME)
             ->setMaxResults($pagerParameterObject->getLimit())
@@ -44,9 +45,11 @@ class TodoRepository extends AbstractRepository
     /**
      * @return int
      */
-    public function getTableRows() {
+    public function getTableRows()
+    {
         return $this
             ->createQueryBuilder()
+            ->setQueryId(__METHOD__)
             ->select('count(*)')
             ->from(TodoTable::TABLE_NAME)
             ->execute()
@@ -62,8 +65,8 @@ class TodoRepository extends AbstractRepository
     public function getById($id): Todo
     {
         $qB = $this->createQueryBuilder();
-
         $row = $qB
+            ->setQueryId(__METHOD__)
             ->select(TodoTable::ENTITY_FIELDS)
             ->from(TodoTable::TABLE_NAME)
             ->where(TodoTable::FIELD_ID . ' = ' . $qB->createNamedParameter($id))

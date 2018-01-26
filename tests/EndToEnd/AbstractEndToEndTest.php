@@ -1,6 +1,6 @@
 <?php namespace EndToEnd;
 
-use Doctrine\DBAL\Connection;
+use ExtendedSlim\Database\Connection;
 use Doctrine\DBAL\ConnectionException;
 use Exception;
 use ExtendedSlim\App;

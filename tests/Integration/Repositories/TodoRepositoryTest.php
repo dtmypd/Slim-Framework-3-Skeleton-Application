@@ -50,6 +50,7 @@ class TodoRepositoryTest extends AbstractIntegrationTest
         // Assert
         $qB   = $this->createQueryBuilder();
         $rows = $qB
+            ->setQueryId(__METHOD__)
             ->select(1)
             ->from(TodoTable::TABLE_NAME)
             ->where(TodoTable::FIELD_NAME . ' = ' . $qB->createNamedParameter($expectedName))

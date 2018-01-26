@@ -1,7 +1,7 @@
 <?php namespace App\Repositories;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Query\QueryBuilder;
+use ExtendedSlim\Database\Connection;
+use ExtendedSlim\Decorators\LoggingQueryBuilder;
 
 abstract class AbstractRepository
 {
@@ -25,9 +25,9 @@ abstract class AbstractRepository
     }
 
     /**
-     * @return QueryBuilder
+     * @return LoggingQueryBuilder
      */
-    protected function createQueryBuilder(): QueryBuilder
+    protected function createQueryBuilder(): LoggingQueryBuilder
     {
         return $this->connection->createQueryBuilder();
     }
