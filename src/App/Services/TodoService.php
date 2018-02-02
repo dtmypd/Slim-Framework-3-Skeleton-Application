@@ -11,6 +11,7 @@ use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\RestApiResponse;
 use Exception;
+use Monolog\Logger;
 
 class TodoService
 {
@@ -24,10 +25,11 @@ class TodoService
      * @param TodoRepository $todoRepository
      * @param Connection     $connection
      */
-    public function __construct(TodoRepository $todoRepository, Connection $connection)
+    public function __construct(TodoRepository $todoRepository, Connection $connection, Logger $logger)
     {
         $this->todoRepository = $todoRepository;
         $this->connection     = $connection;
+        $this->logger         = $logger;
     }
 
     /**
@@ -47,11 +49,18 @@ class TodoService
 
             $this->connection->commit();
 
+            $this->logger->info('post todo create', [
+                'name'      => $name,
+                'userId'    => $userId
+            ]);
+
             return new RestApiResponse();
         }
         catch (Exception $e)
         {
             $this->connection->rollBack();
+
+            $this->logger->error('post todo create error', [ 'exception' => $e ]);
 
             return new RestApiResponse(
                 null,
@@ -75,6 +84,12 @@ class TodoService
         $todoList  = $this->todoRepository->search(new PagerParameterObject($perPage, ($page - 1) * $perPage));
         $tableRows = $this->todoRepository->getTableRows();
         $this->connection->commit();
+
+        $this->logger->info('get todo search', [
+            'page'      => $page,
+            'perPage'   => $perPage,
+            'tableRows' => $tableRows
+        ]);
 
         return new RestApiResponse(
             new PaginatedTodoListValueObject($todoList, $this->paginatorBuilder($tableRows, $perPage, $page))
@@ -111,10 +126,16 @@ class TodoService
     {
         try
         {
-            return new RestApiResponse($this->todoRepository->getById($id));
+            $response = new RestApiResponse($this->todoRepository->getById($id));
+            $this->logger->info('get todo by id', [ 'id' => $id ]);
+            return $response;
         }
         catch (RecordNotFoundException $e)
         {
+            $this->logger->error('get todo by id error', [
+                'id'        => $id,
+                'exception' => $e
+            ]);
             return new RestApiResponse(
                 ['id' => $id],
                 ResponseMessageConstants::TODO_ITEM_ERROR_ID,

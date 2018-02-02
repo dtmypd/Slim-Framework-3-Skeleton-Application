@@ -10,6 +10,7 @@ use ExtendedSlim\Database\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
 use ExtendedSlim\Factories\MemcachedFactory;
 use ExtendedSlim\Factories\TranslatorFactory;
+use ExtendedSlim\Factories\LoggerFactory;
 use ExtendedSlim\Handlers\Error;
 use ExtendedSlim\Handlers\NotAllowed;
 use ExtendedSlim\Handlers\NotFound;
@@ -27,6 +28,7 @@ use Slim\Http\Environment;
 use Slim\Http\Headers;
 use ExtendedSlim\Router;
 use Symfony\Component\Translation\Translator;
+use Monolog\Logger;
 
 class ContainerConfig
 {
@@ -96,6 +98,7 @@ class ContainerConfig
             Translator::class                            => DI\factory([TranslatorFactory::class, 'create'])
                 ->parameter('translationResourcePath', realpath(__DIR__ . '/../resources/translations')),
             Memcached::class                             => DI\factory([MemcachedFactory::class, 'create']),
+            Logger::class                                => DI\factory([LoggerFactory::class, 'create']),
         ];
     }
 
