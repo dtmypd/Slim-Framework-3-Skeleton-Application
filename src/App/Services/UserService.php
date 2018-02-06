@@ -10,6 +10,7 @@ use Exception;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\RestApiResponse;
+use Monolog\Logger;
 
 class UserService
 {
@@ -30,12 +31,14 @@ class UserService
     public function __construct(
         UserRepository $userRepository,
         UserRepositoryCacheDecorator $userRepositoryCacheDecorator,
-        Connection $connection
+        Connection $connection,
+        Logger $logger
     )
     {
         $this->userRepository               = $userRepository;
         $this->connection                   = $connection;
         $this->userRepositoryCacheDecorator = $userRepositoryCacheDecorator;
+        $this->logger                       = $logger;
     }
 
     /**
@@ -65,11 +68,18 @@ class UserService
 
             $this->connection->commit();
 
+            $this->logger->info('user create', ['name' => $name]);
+
             return new RestApiResponse();
         }
         catch (Exception $e)
         {
             $this->connection->rollBack();
+
+            $this->logger->error('user create error', [
+                'name'      => $name,
+                'exception' => $e
+            ]);
 
             return new RestApiResponse(
                 null,
