@@ -15,14 +15,6 @@ use Monolog\Logger;
 
 class TodoService
 {
-    const CREATE_LOG_MSG        = 'todo create';
-    const CREATE_ERROR_LOG_MSG  = 'todo create error';
-
-    const SEARCH_LOG_MSG  = 'todo search';
-
-    const BYID_LOG_MSG  = 'todo by id';
-    const BYID_ERROR_LOG_MSG  = 'todo by id error';
-
     /** @var TodoRepository */
     private $todoRepository;
 
@@ -57,9 +49,9 @@ class TodoService
 
             $this->connection->commit();
 
-            $this->logger->info(self::CREATE_LOG_MSG, [
-                'name'      => $name,
-                'userId'    => $userId
+            $this->logger->info('todo create', [
+                'name'   => $name,
+                'userId' => $userId
             ]);
 
             return new RestApiResponse();
@@ -68,7 +60,7 @@ class TodoService
         {
             $this->connection->rollBack();
 
-            $this->logger->error(self::CREATE_ERROR_LOG_MSG, [ 'exception' => $e ]);
+            $this->logger->error('todo create error', ['exception' => $e]);
 
             return new RestApiResponse(
                 null,
@@ -93,7 +85,7 @@ class TodoService
         $tableRows = $this->todoRepository->getTableRows();
         $this->connection->commit();
 
-        $this->logger->info(self::SEARCH_LOG_MSG, [
+        $this->logger->info('todo search', [
             'page'      => $page,
             'perPage'   => $perPage,
             'tableRows' => $tableRows
@@ -135,12 +127,12 @@ class TodoService
         try
         {
             $response = new RestApiResponse($this->todoRepository->getById($id));
-            $this->logger->info(self::BYID_LOG_MSG, [ 'id' => $id ]);
+            $this->logger->info('todo by id', ['id' => $id]);
             return $response;
         }
         catch (RecordNotFoundException $e)
         {
-            $this->logger->error(self::BYID_ERROR_LOG_MSG, [
+            $this->logger->error('todo by id error', [
                 'id'        => $id,
                 'exception' => $e
             ]);

@@ -14,9 +14,6 @@ use Monolog\Logger;
 
 class UserService
 {
-    const CREATE_LOG_MSG        = 'user create';
-    const CREATE_ERROR_LOG_MSG  = 'user create error';
-
     /** @var UserRepository */
     private $userRepository;
 
@@ -71,7 +68,7 @@ class UserService
 
             $this->connection->commit();
 
-            $this->logger->info(self::CREATE_LOG_MSG, [ 'name' => $name ]);
+            $this->logger->info('user create', ['name' => $name]);
 
             return new RestApiResponse();
         }
@@ -79,7 +76,7 @@ class UserService
         {
             $this->connection->rollBack();
 
-            $this->logger->error('post user create error', [
+            $this->logger->error('user create error', [
                 'name'      => $name,
                 'exception' => $e
             ]);
