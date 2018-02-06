@@ -128,6 +128,7 @@ class TodoService
         {
             $response = new RestApiResponse($this->todoRepository->getById($id));
             $this->logger->info('todo by id', ['id' => $id]);
+
             return $response;
         }
         catch (RecordNotFoundException $e)
@@ -136,6 +137,7 @@ class TodoService
                 'id'        => $id,
                 'exception' => $e
             ]);
+
             return new RestApiResponse(
                 ['id' => $id],
                 ResponseMessageConstants::TODO_ITEM_ERROR_ID,
