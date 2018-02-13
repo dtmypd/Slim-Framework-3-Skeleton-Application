@@ -4,7 +4,7 @@ use Exception;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
-class IndexActionTest extends AbstractEndToEndTest
+class IndexActionTest extends EndToEndTestBase
 {
     /**
      * @test

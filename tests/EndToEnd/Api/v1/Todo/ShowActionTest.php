@@ -7,7 +7,7 @@ use Psr\Container\NotFoundExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
-class ShowActionTest extends AbstractEndToEndTest
+class ShowActionTest extends EndToEndTestBase
 {
     /**
      * @test
