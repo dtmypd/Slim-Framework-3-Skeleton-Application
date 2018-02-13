@@ -1,7 +1,7 @@
 <?php namespace App\Repositories;
 
 use ExtendedSlim\Database\Connection;
-use ExtendedSlim\Decorators\LoggingQueryBuilder;
+use ExtendedSlim\Services\LoggingQueryBuilder;
 
 abstract class AbstractRepository
 {
