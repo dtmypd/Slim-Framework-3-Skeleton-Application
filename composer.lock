@@ -514,6 +514,62 @@
             "time": "2014-09-09T13:34:57+00:00"
         },
         {
+            "name": "graylog2/gelf-php",
+            "version": "1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bzikarsky/gelf-php.git",
+                "reference": "c4e0743ba323459b6e62222107a0898e77d2fd6e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bzikarsky/gelf-php/zipball/c4e0743ba323459b6e62222107a0898e77d2fd6e",
+                "reference": "c4e0743ba323459b6e62222107a0898e77d2fd6e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "~1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.3",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gelf\\": "src/Gelf"
+                },
+                "files": [
+                    "src/check_technical_requirements.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benjamin Zikarsky",
+                    "email": "benjamin@zikarsky.de"
+                },
+                {
+                    "name": "gelf-php contributors",
+                    "homepage": "https://github.com/bzikarsky/gelf-php/contributors"
+                }
+            ],
+            "description": "A php implementation to send log-messages to a GELF compatible backend like Graylog2.",
+            "time": "2017-06-24T10:38:25+00:00"
+        },
+        {
             "name": "marc-mabe/php-enum",
             "version": "v3.0.0",
             "source": {
@@ -659,20 +715,23 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6"
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/b5f95749071c82a8e0f58586987627054400cdf6",
-                "reference": "b5f95749071c82a8e0f58586987627054400cdf6",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/181d480e08d9476e61381e04a71b34dc0432e812",
+                "reference": "181d480e08d9476e61381e04a71b34dc0432e812",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35|~5.7"
             },
             "type": "library",
             "autoload": {
@@ -698,7 +757,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-01-19T11:35:12+00:00"
+            "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "php-di/invoker",
@@ -935,16 +994,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/professionhu/extended-slim.git",
-                "reference": "29ef23563443e32f63fbea1f8478ad907ce25446"
+                "reference": "aabf410d4fe5444b62ae1e071a013e187e5eccf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/29ef23563443e32f63fbea1f8478ad907ce25446",
-                "reference": "29ef23563443e32f63fbea1f8478ad907ce25446",
+                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/aabf410d4fe5444b62ae1e071a013e187e5eccf8",
+                "reference": "aabf410d4fe5444b62ae1e071a013e187e5eccf8",
                 "shasum": ""
             },
             "require": {
                 "doctrine/dbal": "^2.6",
+                "graylog2/gelf-php": "^1.5",
                 "marc-mabe/php-enum": "^3.0",
                 "monolog/monolog": "^1.17",
                 "php": ">=5.5.0",
@@ -976,7 +1036,7 @@
                 "source": "https://github.com/professionhu/extended-slim/tree/master",
                 "issues": "https://github.com/professionhu/extended-slim/issues"
             },
-            "time": "2018-01-28T19:13:11+00:00"
+            "time": "2018-02-14T11:02:45+00:00"
         },
         {
             "name": "psr/container",

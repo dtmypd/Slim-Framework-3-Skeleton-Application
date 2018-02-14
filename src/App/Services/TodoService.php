@@ -21,9 +21,13 @@ class TodoService
     /** @var Connection */
     private $connection;
 
+    /** @var Logger */
+    private $logger;
+
     /**
      * @param TodoRepository $todoRepository
      * @param Connection     $connection
+     * @param Logger         $logger
      */
     public function __construct(TodoRepository $todoRepository, Connection $connection, Logger $logger)
     {
