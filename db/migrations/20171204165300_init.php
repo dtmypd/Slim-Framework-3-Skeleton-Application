@@ -25,7 +25,7 @@ class Init extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function change()
+    public function up()
     {
         $table = $this->table('users');
         $table
@@ -39,4 +39,15 @@ class Init extends AbstractMigration
             ->addForeignKey('user_id', 'users', 'id')
             ->save();
     }
+
+    /**
+     * Migrate Down.
+     */
+    public function down()
+    {
+        $this->table('todo_list')->dropForeignKey('user_id')->save();
+        $this->dropTable('todo_list');
+        $this->dropTable('users');
+    }
+
 }
