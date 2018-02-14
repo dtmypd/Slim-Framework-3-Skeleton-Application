@@ -20,7 +20,7 @@ class CounterService
      *
      * @return int
      */
-    public function addAndGet(int $number)
+    public function addAndGet(int $number): int
     {
         if (!$this->sessionService->exists('counter_add_value'))
         {

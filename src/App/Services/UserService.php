@@ -31,8 +31,7 @@ class UserService
         UserRepository $userRepository,
         UserRepositoryCacheDecorator $userRepositoryCacheDecorator,
         Connection $connection
-    )
-    {
+    ) {
         $this->userRepository               = $userRepository;
         $this->connection                   = $connection;
         $this->userRepositoryCacheDecorator = $userRepositoryCacheDecorator;
@@ -55,7 +54,7 @@ class UserService
      * @return RestApiResponse
      * @throws ConnectionException
      */
-    public function create(string $name)
+    public function create(string $name): RestApiResponse
     {
         $this->connection->beginTransaction();
 

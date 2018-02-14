@@ -37,7 +37,7 @@ class TodoService
      * @return RestApiResponse
      * @throws ConnectionException
      */
-    public function create(string $name, int $userId)
+    public function create(string $name, int $userId): RestApiResponse
     {
         $this->connection->beginTransaction();
 
@@ -88,7 +88,7 @@ class TodoService
      *
      * @return array
      */
-    private function paginatorBuilder(int $tableRows, int $perPage, int $page)
+    private function paginatorBuilder(int $tableRows, int $perPage, int $page): array
     {
         $lastPage = round($tableRows / $perPage);
 
