@@ -1,11 +1,13 @@
-<?php
+<?php namespace App\Config;
 
-namespace App\Config;
-
-use \DI;
-use \DI\Bridge\Slim\CallableResolver;
-use \DI\Bridge\Slim\ControllerInvoker;
-use \DI\Container;
+use App\Repositories\TodoRepository;
+use App\Services\TodoService;
+use DI;
+use DI\Bridge\Slim\CallableResolver;
+use DI\Bridge\Slim\ControllerInvoker;
+use DI\Container;
+use ExtendedSlim\App\PhpDIEntity;
+use ExtendedSlim\App\PhpDIEntityContainer;
 use ExtendedSlim\Database\Connection;
 use ExtendedSlim\Factories\ConnectionFactory;
 use ExtendedSlim\Factories\MemcachedFactory;
@@ -37,16 +39,39 @@ class ContainerConfig
      */
     public function getConfig()
     {
-        return array_merge($this->getBaseConfig(), $this->getDotEnvDependentConfig());
+        return array_merge($this->getBaseConfig(), $this->getAppDIConfig(), $this->getDotEnvDependentConfig());
     }
 
     /**
      * @return array
      */
-    private function getBaseConfig()
+    private function getAppDIConfig(): array
     {
+        //@todo: move array to the /config/di_class_predefine.php
+        $config = [
+            (new PhpDIEntity(TodoService::class))
+                ->setConstructorParameter('todoRepository', TodoRepository::class)
+                ->setConstructorParameter('connection', Connection::class)
+                ->setConstructorParameter('logger', Logger::class),
+        ];
+
+        $appDi = new PhpDIEntityContainer();
+
+        foreach ($config as $item)
+        {
+            $appDi->pushClass($item);
+        }
+
+        return $appDi->getContainer();
+    }
+
+    /**
+     * @return array
+     */
+    private function getBaseConfig(): array
+    {
+        //@todo: move array to the /config/di_base.php
         return [
-            // Settings that can be customized by users
             'settings.httpVersion'                       => '1.1',
             'settings.responseChunkSize'                 => 4096,
             'settings.outputBuffering'                   => 'append',
@@ -79,6 +104,7 @@ class ContainerConfig
             {
                 $headers  = new Headers(['Content-Type' => 'text/html; charset=UTF-8']);
                 $response = new Response(200, $headers);
+
                 return $response->withProtocolVersion($c->get('settings')['httpVersion']);
             },
             'foundHandler'                               => DI\object(ControllerInvoker::class)
@@ -90,6 +116,7 @@ class ContainerConfig
                     new TypeHintContainerResolver($c),
                     new DefaultValueResolver(),
                 ];
+
                 return new Invoker(new ResolverChain($resolvers), $c);
             },
             'callableResolver'                           => DI\object(CallableResolver::class),
@@ -105,15 +132,27 @@ class ContainerConfig
     /**
      * @return array
      */
-    private function getDotEnvDependentConfig()
+    private function getDotEnvDependentConfig(): array
     {
-        return [
-            'errorHandler'      => DI\object(Error::class)
-                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
-            'phpErrorHandler'   => DI\object(PhpError::class)
-                ->constructor(DI\get('settings.displayErrorDetails'), DI\get('settings.outputBuffering')),
-            'notFoundHandler'   => DI\object(NotFound::class),
-            'notAllowedHandler' => DI\object(NotAllowed::class),
-        ];
+        if (in_array(getenv('APP_ENV'), ['DEV', 'TEST']))
+        {
+            //@todo: move array to the /config/di_dev.php
+            return [
+                'errorHandler'      => DI\object(Error::class)
+                    ->constructor(
+                        DI\get('settings.displayErrorDetails'),
+                        DI\get('settings.outputBuffering')
+                    ),
+                'phpErrorHandler'   => DI\object(PhpError::class)
+                    ->constructor(
+                        DI\get('settings.displayErrorDetails'),
+                        DI\get('settings.outputBuffering')
+                    ),
+                'notFoundHandler'   => DI\object(NotFound::class),
+                'notAllowedHandler' => DI\object(NotAllowed::class),
+            ];
+        }
+
+        return [];
     }
 }
