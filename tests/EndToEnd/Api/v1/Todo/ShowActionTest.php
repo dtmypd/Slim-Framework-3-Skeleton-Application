@@ -20,23 +20,22 @@ class ShowActionTest extends AbstractEndToEndTest
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function getInsertedRecord_perfect()
+    public function getInsertedRecord_perfect_perfect()
     {
         // Arrange
         (new ShowActionTestData($this->getConnection()))->getInsertedRecord_perfect();
-        $getUri               = '/v1/todo/123';
-        $expectedHttpCode     = 200;
+        $getUri           = '/v1/todo/123';
+        $expectedHttpCode = 200;
         $expectedTodoId   = 123;
         $expectedTodoName = 'todo 123';
 
         // Act
-        $response = $this->createGetRequest($getUri);
-
+        $response       = $this->createGetRequest($getUri);
         $responseEntity = $this->createResponseEntityFromResponse($response);
 
-        // Assert
+//        // Assert
         $this->assertEquals($expectedHttpCode, $response->getStatusCode(), 'Status code mismatch.');
-        $this->assertEquals($expectedTodoId, $responseEntity->getData()->todoList->id, 'Id mismatch.');
-        $this->assertEquals($expectedTodoName, $responseEntity->getData()->todoList->name, 'Name mismatch.');
+        $this->assertEquals($expectedTodoId, $responseEntity->getData()->id, 'Id mismatch.');
+        $this->assertEquals($expectedTodoName, $responseEntity->getData()->name, 'Name mismatch.');
     }
 }
