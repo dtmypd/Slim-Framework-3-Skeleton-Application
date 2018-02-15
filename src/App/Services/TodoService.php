@@ -11,7 +11,7 @@ use ExtendedSlim\Exceptions\RecordNotFoundException;
 use ExtendedSlim\Http\HttpCodeConstants;
 use ExtendedSlim\Http\RestApiResponse;
 use Exception;
-use Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 class TodoService
 {
@@ -21,15 +21,15 @@ class TodoService
     /** @var Connection */
     private $connection;
 
-    /** @var Logger */
+    /** @var LoggerInterface */
     private $logger;
 
     /**
-     * @param TodoRepository $todoRepository
-     * @param Connection     $connection
-     * @param Logger         $logger
+     * @param TodoRepository  $todoRepository
+     * @param Connection      $connection
+     * @param LoggerInterface $logger
      */
-    public function __construct(TodoRepository $todoRepository, Connection $connection, Logger $logger)
+    public function __construct(TodoRepository $todoRepository, Connection $connection, LoggerInterface $logger)
     {
         $this->todoRepository = $todoRepository;
         $this->connection     = $connection;
@@ -53,10 +53,7 @@ class TodoService
 
             $this->connection->commit();
 
-            $this->logger->info('todo create', [
-                'name'   => $name,
-                'userId' => $userId
-            ]);
+            $this->logger->info('todo create', ['name' => $name, 'userId' => $userId]);
 
             return new RestApiResponse();
         }
@@ -89,11 +86,7 @@ class TodoService
         $tableRows = $this->todoRepository->getTableRows();
         $this->connection->commit();
 
-        $this->logger->info('todo search', [
-            'page'      => $page,
-            'perPage'   => $perPage,
-            'tableRows' => $tableRows
-        ]);
+        $this->logger->info('todo search', ['page' => $page, 'perPage' => $perPage, 'tableRows' => $tableRows,]);
 
         return new RestApiResponse(
             new PaginatedTodoListValueObject($todoList, $this->paginatorBuilder($tableRows, $perPage, $page))
@@ -137,10 +130,7 @@ class TodoService
         }
         catch (RecordNotFoundException $e)
         {
-            $this->logger->error('todo by id error', [
-                'id'        => $id,
-                'exception' => $e
-            ]);
+            $this->logger->error('todo by id error', ['id' => $id, 'exception' => $e]);
 
             return new RestApiResponse(
                 ['id' => $id],
