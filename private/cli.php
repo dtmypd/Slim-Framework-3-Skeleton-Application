@@ -7,17 +7,18 @@ use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Environment;
+use App\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../src/ExtendedSlim/Helpers.php';
+require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
 
 $argv = $GLOBALS['argv'];
 
 $requestMethod = $argv[1];
 $requestUri    = $argv[2];
 
-(new Config())->envSetup();
-$app = new App(
+(new Config( __DIR__ . '../'))->envSetup();
+$appConfig = (new ContainerConfig(
     [
         'request' => Request::createFromEnvironment(
             Environment::mock(
@@ -27,7 +28,9 @@ $app = new App(
             )
         )
     ]
-);
+))->getConfig();
+
+$app = new App($appConfig);
 
 try
 {

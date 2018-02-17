@@ -34,12 +34,20 @@ use Monolog\Logger;
 
 class ContainerConfig
 {
+    /** @var array  */
+    var $customConfigs;
+
+    public function __construct($customConfigs = [])
+    {
+        $this->customConfigs = $customConfigs;
+    }
+
     /**
      * @return array
      */
     public function getConfig()
     {
-        return array_merge($this->getBaseConfig(), $this->getAppDIConfig(), $this->getDotEnvDependentConfig());
+        return array_merge($this->getBaseConfig(), $this->getDotEnvDependentConfig(), $this->customConfigs);
     }
 
     /**

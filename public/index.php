@@ -11,12 +11,13 @@ use ExtendedSlim\App\Config;
 use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
+use App\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
 
 (new Config(realpath('../')))->envSetup();
-$app = new App();
+$app = new App((new ContainerConfig())->getConfig());
 
 try
 {
