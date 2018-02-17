@@ -5,12 +5,12 @@ use DI\DependencyException;
 use DI\NotFoundException;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
-use ExtendedSlim\Tests\Integration\AbstractIntegrationTest;
 use Integration\Repositories\TodoRepositoryTestData;
 use InvalidArgumentException;
+use Integration\IntegrationTestBase;
 use PDO;
 
-class TodoRepositoryTest extends AbstractIntegrationTest
+class TodoRepositoryTest extends IntegrationTestBase
 {
     /** @var $todoRepository TodoRepository */
     private $todoRepository;

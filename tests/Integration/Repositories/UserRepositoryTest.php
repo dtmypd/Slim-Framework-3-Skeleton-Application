@@ -4,10 +4,10 @@ use App\Entities\User;
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
-use ExtendedSlim\Tests\Integration\AbstractIntegrationTest;
+use Integration\IntegrationTestBase;
 use PHPUnit_Framework_MockObject_MockObject;
 
-class UserRepositoryTest extends AbstractIntegrationTest
+class UserRepositoryTest extends IntegrationTestBase
 {
     public function setupEnv()
     {
