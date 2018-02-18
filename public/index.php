@@ -15,9 +15,17 @@ use App\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
+require __DIR__ . '../src/App/Config/DiBase.php';
+require __DIR__ . '../src/App/Config/DiClassPredefine.php';
+require __DIR__ . '../src/App/Config/DiDev.php';
+
 
 (new Config(realpath('../')))->envSetup();
-$app = new App((new ContainerConfig())->getConfig());
+$app = new App((new ContainerConfig(
+    $baseConfig,
+    $classConfig,
+    $devConfig,
+))->getConfig());
 
 try
 {

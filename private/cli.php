@@ -7,10 +7,13 @@ use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Environment;
-use App\Config\ContainerConfig;
+use ExtendedSlim\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
+require __DIR__ . '../src/App/Config/DiBase.php';
+require __DIR__ . '../src/App/Config/DiClassPredefine.php';
+require __DIR__ . '../src/App/Config/DiDev.php';
 
 $argv = $GLOBALS['argv'];
 
@@ -19,6 +22,9 @@ $requestUri    = $argv[2];
 
 (new Config( __DIR__ . '../'))->envSetup();
 $appConfig = (new ContainerConfig(
+    $baseConfig,
+    $classConfig,
+    $devConfig,
     [
         'request' => Request::createFromEnvironment(
             Environment::mock(

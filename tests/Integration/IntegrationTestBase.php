@@ -1,7 +1,7 @@
 <?php namespace Integration;
 
 use ExtendedSlim\Tests\Integration\AbstractIntegrationTest;
-use App\Config\ContainerConfig;
+use ExtendedSlim\App\Config\ContainerConfig;
 use ExtendedSlim\App;
 
 abstract class IntegrationTestBase extends AbstractIntegrationTest
@@ -9,7 +9,15 @@ abstract class IntegrationTestBase extends AbstractIntegrationTest
 
     public function getApp()
     {
-        return new App((new ContainerConfig())->getConfig());
+        require __DIR__ . '/../../src/App/Config/DiBase.php';
+        require __DIR__ . '/../../src/App/Config/DiClassPredefine.php';
+        require __DIR__ . '/../../src/App/Config/DiDev.php';
+
+        return new App((new ContainerConfig(
+            $baseConfig,
+            $classConfig,
+            $devConfig
+        ))->getConfig());
     }
 
 }
