@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-final class TodoTable
+final class TodoTable extends AbstractTable
 {
     const TABLE_NAME = 'todo_list';
 

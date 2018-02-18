@@ -1,6 +1,6 @@
 <?php namespace App\Repositories;
 
-final class UserTable
+final class UserTable extends AbstractTable
 {
     const TABLE_NAME = 'users';
 
