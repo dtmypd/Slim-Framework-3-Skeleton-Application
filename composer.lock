@@ -994,12 +994,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/professionhu/extended-slim.git",
-                "reference": "141b9ea2e1c3b83f857d1bcfefb3eccd57a6fdb3"
+                "reference": "134c8a7080cb4f8be04f810ced2b787e45f2e4d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/141b9ea2e1c3b83f857d1bcfefb3eccd57a6fdb3",
-                "reference": "141b9ea2e1c3b83f857d1bcfefb3eccd57a6fdb3",
+                "url": "https://api.github.com/repos/professionhu/extended-slim/zipball/134c8a7080cb4f8be04f810ced2b787e45f2e4d6",
+                "reference": "134c8a7080cb4f8be04f810ced2b787e45f2e4d6",
                 "shasum": ""
             },
             "require": {
@@ -1032,10 +1032,10 @@
             ],
             "description": "A customized Slim framework",
             "support": {
-                "source": "https://github.com/professionhu/extended-slim/tree/master",
+                "source": "https://github.com/professionhu/extended-slim/tree/bg_develop",
                 "issues": "https://github.com/professionhu/extended-slim/issues"
             },
-            "time": "2018-02-15T14:45:49+00:00"
+            "time": "2018-02-18T01:06:48+00:00"
         },
         {
             "name": "psr/container",

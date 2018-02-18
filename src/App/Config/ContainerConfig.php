@@ -47,7 +47,11 @@ class ContainerConfig
      */
     public function getConfig()
     {
-        return array_merge($this->getBaseConfig(), $this->getDotEnvDependentConfig(), $this->customConfigs);
+        return array_merge($this->getBaseConfig(),
+            $this->getAppDIConfig(),
+            $this->getDotEnvDependentConfig(),
+            $this->customConfigs
+        );
     }
 
     /**
