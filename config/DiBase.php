@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gabor.budai
- * Date: 2018.02.18.
- * Time: 23:20
- */
 
 use DI\Bridge\Slim\CallableResolver;
 use DI\Bridge\Slim\ControllerInvoker;
@@ -28,7 +22,7 @@ use ExtendedSlim\Router;
 use Symfony\Component\Translation\Translator;
 use Monolog\Logger;
 
-$baseConfig = [
+return [
     'settings.httpVersion'                       => '1.1',
     'settings.responseChunkSize'                 => 4096,
     'settings.outputBuffering'                   => 'append',

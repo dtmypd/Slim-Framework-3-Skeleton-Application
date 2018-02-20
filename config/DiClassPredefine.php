@@ -6,7 +6,7 @@ use App\Repositories\TodoRepository;
 use ExtendedSlim\Database\Connection;
 use Monolog\Logger;
 
-$classConfig = [
+return [
     (new PhpDIEntity(TodoService::class))
         ->setConstructorParameter('todoRepository', TodoRepository::class)
         ->setConstructorParameter('connection', Connection::class)

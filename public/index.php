@@ -1,6 +1,7 @@
 <?php
 
-if (in_array(PHP_SAPI , ['cli', 'cli-server'])) {
+if (in_array(PHP_SAPI, ['cli', 'cli-server']))
+{
     print "\n\n" . 'Error: CLI calls are not allowed on the public entry point.' . "\n\n";
 
     exit;
@@ -8,29 +9,25 @@ if (in_array(PHP_SAPI , ['cli', 'cli-server'])) {
 
 use ExtendedSlim\App;
 use ExtendedSlim\App\Config;
+use ExtendedSlim\App\Config\ContainerConfig;
 use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
-use App\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
-require __DIR__ . '../src/App/Config/DiBase.php';
-require __DIR__ . '../src/App/Config/DiClassPredefine.php';
-require __DIR__ . '../src/App/Config/DiDev.php';
-
+$diBaseConfig           = require __DIR__ . '/../config/DiBase.php';
+$diClassPredefineConfig = require __DIR__ . '/../config/DiClassPredefine.php';
+$diDevConfig            = require __DIR__ . '/../config/DiDev.php';
 
 (new Config(realpath('../')))->envSetup();
-$app = new App((new ContainerConfig(
-    $baseConfig,
-    $classConfig,
-    $devConfig,
-))->getConfig());
+
+$app = new App((new ContainerConfig($diBaseConfig, $diClassPredefineConfig, $diDevConfig))->getConfig());
 
 try
 {
-    require_once  __DIR__ . '/../routes/api.php';
-    require_once  __DIR__ . '/../routes/web.php';
+    require_once __DIR__ . '/../routes/api.php';
+    require_once __DIR__ . '/../routes/web.php';
 
     $app->run();
 }
