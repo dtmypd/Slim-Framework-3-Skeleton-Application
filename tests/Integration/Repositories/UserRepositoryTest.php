@@ -2,20 +2,17 @@
 
 use App\Entities\User;
 use ExtendedSlim\App;
-use ExtendedSlim\App\Config;
 use ExtendedSlim\Exceptions\RecordNotFoundException;
 use Integration\IntegrationTestBase;
 use PHPUnit_Framework_MockObject_MockObject;
+use ReflectionException;
 
 class UserRepositoryTest extends IntegrationTestBase
 {
-    public function setupEnv()
-    {
-        (new Config(realpath(__DIR__ . "/../../../")))->envSetup();
-    }
-
-
-    /** @return PHPUnit_Framework_MockObject_MockObject|UserRepository */
+    /**
+     * @return PHPUnit_Framework_MockObject_MockObject|UserRepository
+     * @throws ReflectionException
+     */
     private function getUserRepositoryMock()
     {
         return $this->createMock(UserRepository::class);
@@ -24,6 +21,7 @@ class UserRepositoryTest extends IntegrationTestBase
     /**
      * @test
      * @throws RecordNotFoundException
+     * @throws ReflectionException
      */
     public function findByName_MockCall_WillReturnWithMockedData()
     {

@@ -4,7 +4,6 @@ use App\Entities\Todo;
 use DI\DependencyException;
 use DI\NotFoundException;
 use ExtendedSlim\App;
-use ExtendedSlim\App\Config;
 use Integration\Repositories\TodoRepositoryTestData;
 use InvalidArgumentException;
 use Integration\IntegrationTestBase;
@@ -24,11 +23,6 @@ class TodoRepositoryTest extends IntegrationTestBase
         parent::setUp();
 
         $this->todoRepository = $this->getFromContainer(TodoRepository::class);
-    }
-
-    public function setupEnv()
-    {
-        (new Config(realpath(__DIR__ . "/../../../")))->envSetup();
     }
 
     /**

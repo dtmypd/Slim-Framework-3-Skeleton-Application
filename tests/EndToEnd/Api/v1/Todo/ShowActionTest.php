@@ -33,7 +33,7 @@ class ShowActionTest extends EndToEndTestBase
         $response       = $this->createGetRequest($getUri);
         $responseEntity = $this->createResponseEntityFromResponse($response);
 
-//        // Assert
+        // Assert
         $this->assertEquals($expectedHttpCode, $response->getStatusCode(), 'Status code mismatch.');
         $this->assertEquals($expectedTodoId, $responseEntity->getData()->id, 'Id mismatch.');
         $this->assertEquals($expectedTodoName, $responseEntity->getData()->name, 'Name mismatch.');

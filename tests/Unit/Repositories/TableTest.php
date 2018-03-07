@@ -20,7 +20,9 @@ class TestTable extends AbstractTable
 
 class TableTest extends AbstractTest
 {
-    /** @test */
+    /**
+     * @test
+     */
     public function getAliasedTableColumnNames_AbstractTable_perfect()
     {
         $expectedResult = [
