@@ -15,7 +15,6 @@ use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
 $diBaseConfig           = require __DIR__ . '/../config/DiBase.php';
 $diClassPredefineConfig = require __DIR__ . '/../config/DiClassPredefine.php';
 $diDevConfig            = require __DIR__ . '/../config/DiDev.php';

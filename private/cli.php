@@ -7,32 +7,27 @@ use Psr\Container\ContainerExceptionInterface;
 use Slim\Exception\MethodNotAllowedException;
 use Slim\Exception\NotFoundException;
 use Slim\Http\Environment;
-use ExtendedSlim\Config\ContainerConfig;
+use ExtendedSlim\App\Config\ContainerConfig;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../vendor/professionhu/extended-slim/src/ExtendedSlim/Helpers.php';
-require __DIR__ . '../src/App/Config/DiBase.php';
-require __DIR__ . '../src/App/Config/DiClassPredefine.php';
-require __DIR__ . '../src/App/Config/DiDev.php';
+$diBaseConfig           = require __DIR__ . '/../config/DiBase.php';
+$diClassPredefineConfig = require __DIR__ . '/../config/DiClassPredefine.php';
+$diDevConfig            = require __DIR__ . '/../config/DiDev.php';
 
 $argv = $GLOBALS['argv'];
 
 $requestMethod = $argv[1];
 $requestUri    = $argv[2];
 
-(new Config( __DIR__ . '../'))->envSetup();
-$appConfig = (new ContainerConfig(
-    $baseConfig,
-    $classConfig,
-    $devConfig,
-    [
+(new Config(__DIR__ . '../'))->envSetup();
+$appConfig = (new ContainerConfig($diBaseConfig, $diClassPredefineConfig, $diDevConfig, [
         'request' => Request::createFromEnvironment(
             Environment::mock(
                 [
                     'REQUEST_URI' => '/' . $requestUri,
                 ]
             )
-        )
+        ),
     ]
 ))->getConfig();
 
